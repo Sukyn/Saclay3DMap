@@ -1,7 +1,19 @@
 
+WorkSpace workspace;
+Hud hud;
+
 void setup() {
-  size(1000, 1000, P3D);
-  background(100,100,100);
+  // Display setup
+  fullScreen(P3D);
+  // Setup Head Up Display
+  this.hud = new Hud();
+  smooth(4);
+  frameRate(60);
+  // Initial drawing
+  background(0x40);
+  // Prepare local coordinate system grid & gizmo
+  this.workspace = new WorkSpace(250*100);
+
   // 3D camera (X+ right / Z+ top / Y+ Front)
   camera(
        0  , 2500, 1000,
@@ -10,5 +22,18 @@ void setup() {
 }
 
 void draw(){
-  shape(this.gizmo);
+  this.workspace.update();
+  this.hud.begin();
+  this.hud.displayFPS();
+  this.hud.end();
+}
+
+void keyPressed() {
+  switch (key) {
+    case 'w':
+    case 'W':
+      // Hide/Show grid & Gizmo
+      this.workspace.toggle();
+      break;
+  }
 }

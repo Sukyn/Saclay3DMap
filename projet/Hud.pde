@@ -47,4 +47,11 @@ class Hud {
     text(" Colatitude   "+ String.valueOf((int)(camera.colatitude*180/PI) + " °"),80, 80);
     text(" Radius   "+ String.valueOf((int)camera.radius) + " m",80, 110);
   }
+
+  public void update(Camera camera) {
+    this.begin();
+    this.displayFPS();
+    this.displayCamera(camera);
+    this.end();
+  }
 }

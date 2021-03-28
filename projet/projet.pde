@@ -2,6 +2,7 @@ WorkSpace workspace;
 Hud hud;
 Camera camera;
 Map3D map;
+Land land;
 
 void setup() {
   // Display setup
@@ -24,48 +25,55 @@ void setup() {
 
   // Load Height Map
   this.map = new Map3D("paris_saclay.data");
+  this.land = new Land(this.map,"paris_saclay.jpg");
 }
 
 void draw(){
+  background(0x40);
   this.workspace.update();
-  this.hud.begin();
-  this.hud.displayFPS();
   this.camera.update();
-  this.hud.begin();
-  this.hud.displayFPS();
-  this.hud.displayCamera(this.camera);
-  this.hud.end();
+  this.land.update();
+  this.hud.update(this.camera);
 }
 
 void keyPressed() {
   if (key == CODED){
     switch(keyCode){
       case UP:
-        this.camera.adjustColatitude(1000);
+        this.camera.adjustColatitude(-PI/100);
         break;
       case DOWN:
-        this.camera.adjustColatitude(-1000);
+        this.camera.adjustColatitude(PI/100);
         break;
       case LEFT:
-        this.camera.adjustLongitude(1000);
+        this.camera.adjustLongitude(-PI/100);
         break;
       case RIGHT:
-        this.camera.adjustLongitude(-1000);
+        this.camera.adjustLongitude(PI/100);
         break;
     }
   } else {
     switch (key) {
       case 'w':
       case 'W':
+        // Hide/Show Land
+        this.land.toggle();
         // Hide/Show grid & Gizmo
         this.workspace.toggle();
         break;
       case '+':
-        this.camera.adjustRadius(-1000);
+      case 'p':
+      case 'P':
+        this.camera.adjustRadius(-10);
         break;
       case '-':
-        this.camera.adjustRadius(1000);
+      case 'm':
+      case 'M':
+        this.camera.adjustRadius(10);
         break;
+      case 'l':
+      case 'L':
+        this.camera.toggle();
       }
     }
 

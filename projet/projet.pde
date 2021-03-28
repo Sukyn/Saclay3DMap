@@ -28,6 +28,8 @@ void setup() {
 
 void draw(){
   this.workspace.update();
+  this.hud.begin();
+  this.hud.displayFPS();
   this.camera.update();
   this.hud.begin();
   this.hud.displayFPS();
@@ -64,8 +66,9 @@ void keyPressed() {
       case '-':
         this.camera.adjustRadius(1000);
         break;
+      }
     }
-  }
+
 }
 
 void mouseWheel(MouseEvent event) {

@@ -31,7 +31,6 @@ class Hud {
     textAlign(CENTER, CENTER);
     text(String.valueOf((int)frameRate) + " fps", 40, height-20);
   }
-
   public void displayCamera(Camera camera){
     // Top left area
     noStroke();
@@ -47,6 +46,5 @@ class Hud {
     text(" Longitude   "+ String.valueOf((int)(camera.longitude*180/PI) + " °"),80, 50);
     text(" Colatitude   "+ String.valueOf((int)(camera.colatitude*180/PI) + " °"),80, 80);
     text(" Radius   "+ String.valueOf((int)camera.radius) + " m",80, 110);
-    //  text(String.valueOf((int)frameRate) + " fps", 40, height-20);
   }
-} 
+}

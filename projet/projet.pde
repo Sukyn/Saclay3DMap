@@ -1,6 +1,7 @@
 WorkSpace workspace;
 Hud hud;
 Camera camera;
+Map3D map;
 
 void setup() {
   // Display setup
@@ -20,6 +21,9 @@ void setup() {
 
   //Make camera move easier
   hint(ENABLE_KEY_REPEAT);
+
+  // Load Height Map
+  this.map = new Map3D("paris_saclay.data");
 }
 
 void draw(){

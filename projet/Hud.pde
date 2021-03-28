@@ -49,4 +49,4 @@ class Hud {
     text(" Radius   "+ String.valueOf((int)camera.radius) + " m",80, 110);
     //  text(String.valueOf((int)frameRate) + " fps", 40, height-20);
   }
-}
+} 

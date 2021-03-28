@@ -47,4 +47,4 @@ class Camera {
       this.z = radius*cos(colatitude);
     }
   }
-}
+} 

@@ -97,7 +97,7 @@ class Land {
 
     // Shapes initial visibility
     this.shadow.setVisible(true);
-    this.wireFrame.setVisible(true);
+    this.wireFrame.setVisible(false);
     this.satellite.setVisible(true);
   }
 

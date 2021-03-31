@@ -3,6 +3,7 @@ Hud hud;
 Camera camera;
 Map3D map;
 Land land;
+Gpx gpx;
 
 void setup() {
   // Display setup
@@ -17,7 +18,7 @@ void setup() {
   this.workspace = new WorkSpace(250*100);
 
   // 3D camera (X+ right / Z+ top / Y+ Front)
-  this.camera = new Camera(PI/2, 1.19, 2690);
+  this.camera = new Camera(-PI/2, 1.19, 2690);
   this.camera.update();
 
   //Make camera move easier
@@ -26,6 +27,7 @@ void setup() {
   // Load Height Map
   this.map = new Map3D("paris_saclay.data");
   this.land = new Land(this.map,"paris_saclay.jpg");
+  this.gpx = new Gpx(this.map, "trail.geojson");
 }
 
 void draw(){
@@ -33,6 +35,7 @@ void draw(){
   this.workspace.update();
   this.camera.update();
   this.land.update();
+  this.gpx.update();
   this.hud.update(this.camera);
 }
 
@@ -56,10 +59,14 @@ void keyPressed() {
     switch (key) {
       case 'w':
       case 'W':
-        // Hide/Show Land
-        this.land.toggle();
+
         // Hide/Show grid & Gizmo
         this.workspace.toggle();
+        break;
+      case 'l':
+      case 'L':
+        // Hide/Show Land
+        this.land.toggle();
         break;
       case '+':
       case 'p':
@@ -71,8 +78,8 @@ void keyPressed() {
       case 'M':
         this.camera.adjustRadius(10);
         break;
-      case 'l':
-      case 'L':
+      case 'c':
+      case 'C':
         this.camera.toggle();
       }
     }
@@ -93,4 +100,9 @@ void mouseDragged() {
     float dy = mouseY - pmouseY;
     this.camera.adjustColatitude(dy);
   }
+}
+
+void mousePressed() {
+  if (mouseButton == LEFT)
+    this.gpx.clic(mouseX, mouseY);
 }

@@ -46,10 +46,10 @@ class WorkSpace {
     this.grid.strokeWeight(0.5f);
     this.grid.stroke(0, 0, 0);
     for (int i = -50; i < 50; i++){
-      this.grid.vertex(i*size/100, -size/2, 0);
-      this.grid.vertex(i*size/100, size/2, 0);
-      this.grid.vertex(-size/2, i*size/100,  0);
-      this.grid.vertex(size/2, i*size/100, 0);
+      this.grid.vertex(i*size/100, -size/2, -0.02);
+      this.grid.vertex(i*size/100, size/2, -0.02);
+      this.grid.vertex(-size/2, i*size/100,  -0.02);
+      this.grid.vertex(size/2, i*size/100, -0.02);
     }
     this.grid.endShape();
   }

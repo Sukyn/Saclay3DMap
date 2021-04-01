@@ -4,6 +4,8 @@ Camera camera;
 Map3D map;
 Land land;
 Gpx gpx;
+Railways railways;
+Roads roads;
 
 void setup() {
   // Display setup
@@ -28,6 +30,8 @@ void setup() {
   this.map = new Map3D("paris_saclay.data");
   this.land = new Land(this.map,"paris_saclay.jpg");
   this.gpx = new Gpx(this.map, "trail.geojson");
+  this.railways = new Railways(this.map, "railways.geojson");
+  this.roads = new Roads(this.map, "roads.geojson");
 }
 
 void draw(){
@@ -36,6 +40,8 @@ void draw(){
   this.camera.update();
   this.land.update();
   this.gpx.update();
+  this.railways.update();
+  this.roads.update();
   this.hud.update(this.camera);
 }
 
@@ -67,6 +73,11 @@ void keyPressed() {
       case 'L':
         // Hide/Show Land
         this.land.toggle();
+        break;
+      case 'r':
+      case 'R':
+        this.railways.toggle();
+        this.roads.toggle();
         break;
       case '+':
       case 'p':

@@ -122,7 +122,7 @@ class Roads {
 
       lane.fill(laneColor);
       lane.stroke(laneColor);
-      lane.strokeWeight((float)laneOffset);
+      lane.strokeWeight((float)laneWidth);
       JSONObject geometry = feature.getJSONObject("geometry");
       switch (geometry.getString("type", "undefined")) {
 
@@ -134,7 +134,7 @@ class Roads {
 
           JSONArray first_point = coordinates.getJSONArray(0);
           Map3D.GeoPoint f_gp = this.map.new GeoPoint(first_point.getFloat(0), first_point.getFloat(1));
-          f_gp.elevation += 7.5d;
+          f_gp.elevation += laneOffset;
           Map3D.ObjectPoint f_mp = this.map.new ObjectPoint(f_gp);
           Map3D.ObjectPoint s_mp = f_mp;
 
@@ -146,7 +146,7 @@ class Roads {
               else {
               JSONArray third_point = coordinates.getJSONArray(p+1);
               Map3D.GeoPoint t_gp = this.map.new GeoPoint(third_point.getFloat(0), third_point.getFloat(1));
-              t_gp.elevation += 7.5d;
+              t_gp.elevation += laneOffset;
               t_mp = this.map.new ObjectPoint(t_gp);
               }
 

@@ -6,6 +6,7 @@ Land land;
 Gpx gpx;
 Railways railways;
 Roads roads;
+Buildings buildings;
 
 void setup() {
   // Display setup
@@ -32,6 +33,14 @@ void setup() {
   this.gpx = new Gpx(this.map, "trail.geojson");
   this.railways = new Railways(this.map, "railways.geojson");
   this.roads = new Roads(this.map, "roads.geojson");
+
+  this.buildings = new Buildings(this.map);
+  this.buildings.add("buildings_city.geojson", 0xFFaaaaaa);
+  this.buildings.add("buildings_IPP.geojson", 0xFFCB9837);
+  this.buildings.add("buildings_EDF_Danone.geojson", 0xFF3030FF);
+  this.buildings.add("buildings_CEA_algorithmes.geojson", 0xFF30FF30);
+  this.buildings.add("buildings_Thales.geojson", 0xFFFF3030);
+  this.buildings.add("buildings_Paris_Saclay.geojson", 0xFFee00dd);
 }
 
 void draw(){
@@ -42,6 +51,7 @@ void draw(){
   this.gpx.update();
   this.railways.update();
   this.roads.update();
+  this.buildings.update();
   this.hud.update(this.camera);
 }
 
@@ -92,6 +102,11 @@ void keyPressed() {
       case 'c':
       case 'C':
         this.camera.toggle();
+        break;
+      case 'b':
+      case 'B':
+        this.buildings.toggle();
+        break;
       }
     }
 

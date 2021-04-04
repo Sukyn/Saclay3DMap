@@ -54,14 +54,6 @@ public class Map3D {
    * Set 3D (true) or 2D (false) mode
    */
   final boolean mode3D;
-  /**
-   * South West WGS84 coordinates
-   */
-  Map3D.GeoPoint SouthWest;
-  /**
-   * North East WGS84 coordinates
-   */
-  Map3D.GeoPoint NorthEast;
 
   /**
    * Returns a Map3D object. 
@@ -79,15 +71,10 @@ public class Map3D {
 
     // Load RGE Alti elevation heightmap 
     this.data = loadBytes(fileName);
+    
     // Force flat projection if false (for debug purposes)
     this.mode3D = true;
 
-    // Computes geographic bounding box
-    Map3D.MapPoint mp;
-    mp = new Map3D.MapPoint(Map3D.xllCorner, Map3D.yllCorner);
-    this.SouthWest = new Map3D.GeoPoint(mp);
-    mp = new Map3D.MapPoint(Map3D.xllCorner + Map3D.width, Map3D.yllCorner + Map3D.height);
-    this.NorthEast = new Map3D.GeoPoint(mp);
   }
 
   /**
@@ -192,12 +179,7 @@ public class Map3D {
      * @return           true if current point is inside Map
      */
     boolean inside() {
-      //return new MapPoint(this).inside();
-      return 
-        this.longitude >= Map3D.this.SouthWest.longitude
-        && this.longitude <= Map3D.this.NorthEast.longitude
-        && this.latitude >= Map3D.this.SouthWest.latitude
-        && this.latitude <= Map3D.this.NorthEast.latitude;
+      return new MapPoint(this).inside();
     }
 
     /**

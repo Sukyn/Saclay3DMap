@@ -32,13 +32,6 @@ class Roads {
       return;
     }
 
-
-
-
-
-
-
-
     for (int f=0; f<features.size(); f++) {
 
       PShape lane = createShape();
@@ -121,17 +114,17 @@ class Roads {
          break;
 
       lane.fill(laneColor);
-      lane.stroke(laneColor);
-      lane.strokeWeight((float)laneWidth);
+      //lane.noFill();
+      lane.noStroke();
+    //  lane.stroke(laneColor);
+    //  lane.strokeWeight((float)laneWidth);
+      lane.emissive(0x7F);
       JSONObject geometry = feature.getJSONObject("geometry");
       switch (geometry.getString("type", "undefined")) {
 
       case "LineString":
 
-        // GPX Track
         JSONArray coordinates = geometry.getJSONArray("coordinates");
-        if (coordinates.size() > 2){
-
           JSONArray first_point = coordinates.getJSONArray(0);
           Map3D.GeoPoint f_gp = this.map.new GeoPoint(first_point.getFloat(0), first_point.getFloat(1));
           f_gp.elevation += laneOffset;
@@ -141,9 +134,8 @@ class Roads {
           for (int p=0; p < coordinates.size(); p++) {
             if (s_mp.inside()) {
 
-              Map3D.ObjectPoint t_mp;
-              if (p == coordinates.size()-1) t_mp = s_mp;
-              else {
+              Map3D.ObjectPoint t_mp = s_mp;
+              if (p != coordinates.size()-1) {
               JSONArray third_point = coordinates.getJSONArray(p+1);
               Map3D.GeoPoint t_gp = this.map.new GeoPoint(third_point.getFloat(0), third_point.getFloat(1));
               t_gp.elevation += laneOffset;
@@ -160,7 +152,6 @@ class Roads {
               s_mp = t_mp;
             }
           }
-        }
 
         break;
 
@@ -169,9 +160,9 @@ class Roads {
         break;
       }
 
-
-    this.roads.addChild(lane);
     lane.endShape();
+    this.roads.addChild(lane);
+
     }
   }
 

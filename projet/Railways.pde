@@ -8,7 +8,7 @@ class Railways {
   public Railways(Map3D map, String fileName){
     this.map = map;
     this.railways = createShape(GROUP);
-    int laneWidth = 2;
+    int laneWidth = 5;
 
 
 
@@ -49,8 +49,8 @@ class Railways {
 
       lane.beginShape(QUAD_STRIP);
       lane.fill(255, 255, 255);
-      lane.stroke(255, 255, 255);
-      lane.strokeWeight(4);
+      lane.noStroke();
+      lane.emissive(0x7F);
 
 
       JSONObject feature = features.getJSONObject(f);
@@ -61,10 +61,7 @@ class Railways {
 
       case "LineString":
 
-        // GPX Track
         JSONArray coordinates = geometry.getJSONArray("coordinates");
-        if (coordinates.size() > 2){
-
           JSONArray first_point = coordinates.getJSONArray(0);
           Map3D.GeoPoint f_gp = this.map.new GeoPoint(first_point.getFloat(0), first_point.getFloat(1));
           f_gp.elevation += 7.5d;
@@ -74,9 +71,8 @@ class Railways {
           for (int p=0; p < coordinates.size(); p++) {
             if (s_mp.inside()) {
 
-              Map3D.ObjectPoint t_mp;
-              if (p == coordinates.size()-1) t_mp = s_mp;
-              else {
+              Map3D.ObjectPoint t_mp = s_mp;
+              if (p != coordinates.size()-1){
                 JSONArray third_point = coordinates.getJSONArray(p+1);
                 Map3D.GeoPoint t_gp = this.map.new GeoPoint(third_point.getFloat(0), third_point.getFloat(1));
                 t_gp.elevation += 7.5d;
@@ -93,7 +89,6 @@ class Railways {
               s_mp = t_mp;
             }
           }
-        }
 
         break;
 

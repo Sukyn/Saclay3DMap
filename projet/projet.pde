@@ -94,6 +94,10 @@ void keyPressed() {
       case 'P':
         this.camera.adjustRadius(-10);
         break;
+      case 'g':
+      case 'G':
+        this.gpx.toggle();
+        break;
       case '-':
       case 'm':
       case 'M':

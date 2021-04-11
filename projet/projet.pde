@@ -48,11 +48,11 @@ void draw(){
   this.workspace.update();
   this.camera.update();
   this.land.update();
-  this.gpx.update();
-  this.railways.update();
+//  this.gpx.update();
+//  this.railways.update();
   this.roads.update();
-  this.buildings.update();
-  this.hud.update(this.camera);
+//  this.buildings.update();
+//  this.hud.update(this.camera);
 }
 
 void keyPressed() {

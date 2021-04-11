@@ -119,6 +119,7 @@ class Roads {
     //  lane.stroke(laneColor);
     //  lane.strokeWeight((float)laneWidth);
       lane.emissive(0x7F);
+      String isBridge = feature.getJSONObject("properties").getString("bridge", "N/A");
       JSONObject geometry = feature.getJSONObject("geometry");
       switch (geometry.getString("type", "undefined")) {
 
@@ -131,27 +132,36 @@ class Roads {
           Map3D.ObjectPoint f_mp = this.map.new ObjectPoint(f_gp);
           Map3D.ObjectPoint s_mp = f_mp;
 
-          for (int p=0; p < coordinates.size(); p++) {
-            if (s_mp.inside()) {
+            for (int p=0; p < coordinates.size(); p++) {
+              if (s_mp.inside()) {
 
-              Map3D.ObjectPoint t_mp = s_mp;
-              if (p != coordinates.size()-1) {
-              JSONArray third_point = coordinates.getJSONArray(p+1);
-              Map3D.GeoPoint t_gp = this.map.new GeoPoint(third_point.getFloat(0), third_point.getFloat(1));
-              t_gp.elevation += laneOffset;
-              t_mp = this.map.new ObjectPoint(t_gp);
+                Map3D.ObjectPoint t_mp = s_mp;
+                if (p != coordinates.size()-1) {
+                JSONArray third_point = coordinates.getJSONArray(p+1);
+                Map3D.GeoPoint t_gp = this.map.new GeoPoint(third_point.getFloat(0), third_point.getFloat(1));
+                t_gp.elevation += laneOffset;
+                t_mp = this.map.new ObjectPoint(t_gp);
+                }
+
+                PVector Va = new PVector(t_mp.y - f_mp.y, f_mp.x - t_mp.x).normalize().mult(laneWidth/2.0f);
+                if (isBridge == "N/A"){
+                  lane.normal(0.0f, 0.0f, 1.0f);
+                  lane.vertex(s_mp.x - Va.x, s_mp.y - Va.y, s_mp.z);
+                  lane.normal(0.0f, 0.0f, 1.0f);
+                  lane.vertex(s_mp.x + Va.x, s_mp.y + Va.y, s_mp.z);
+
+                } else {
+                  // GERER LES PONTS ICI SVP
+                  lane.normal(0.0f, 0.0f, 1.0f);
+                  lane.vertex(s_mp.x - Va.x, s_mp.y - Va.y, f_mp.z);
+                  lane.normal(0.0f, 0.0f, 1.0f);
+                  lane.vertex(s_mp.x + Va.x, s_mp.y + Va.y, f_mp.z);
+                }
+                f_mp = s_mp;
+                s_mp = t_mp;
               }
-
-              PVector Va = new PVector(f_mp.y - t_mp.y, f_mp.x - t_mp.x).normalize().mult(laneWidth/2.0f);
-              lane.normal(0.0f, 0.0f, 1.0f);
-              lane.vertex(s_mp.x - Va.x, s_mp.y - Va.y, s_mp.z);
-              lane.normal(0.0f, 0.0f, 1.0f);
-              lane.vertex(s_mp.x + Va.x, s_mp.y + Va.y, s_mp.z);
-
-              f_mp = s_mp;
-              s_mp = t_mp;
             }
-          }
+
 
         break;
 

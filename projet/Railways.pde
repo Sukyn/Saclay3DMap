@@ -62,7 +62,7 @@ class Railways {
       case "LineString":
 
         JSONArray coordinates = geometry.getJSONArray("coordinates");
-          JSONArray first_point = coordinates.getJSONArray(0);
+        JSONArray first_point = coordinates.getJSONArray(0);
           Map3D.GeoPoint f_gp = this.map.new GeoPoint(first_point.getFloat(0), first_point.getFloat(1));
           f_gp.elevation += 7.5d;
           Map3D.ObjectPoint f_mp = this.map.new ObjectPoint(f_gp);

@@ -5,6 +5,9 @@ class Poi {
 
   public Poi(Land land){
     this.land = land;
+    float nearestBykeParkingDistance = 0.0f;
+    float nearestPicNicTableDistance = 0.0f;
+    //this.land.attrib("heat", nearestBykeParkingDistance, nearestPicNicTableDistance); 
   }
 
   JSONArray getPoints(String fileName){

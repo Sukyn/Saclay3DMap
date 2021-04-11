@@ -125,10 +125,10 @@ void mouseDragged() {
   if (mouseButton== CENTER){
     // Camera Horizontal
     float dx = mouseX - pmouseX;
-    this.camera.adjustLongitude(dx);
+    this.camera.adjustLongitude(dx*0.002);
     // Camera Vertical
     float dy = mouseY - pmouseY;
-    this.camera.adjustColatitude(dy);
+    this.camera.adjustColatitude(dy*0.002);
   }
 }
 

@@ -79,7 +79,7 @@ class Railways {
                 t_mp = this.map.new ObjectPoint(t_gp);
               }
 
-              PVector Va = new PVector(t_mp.y - f_mp.y, t_mp.x - f_mp.x).normalize().mult(laneWidth/2.0f);
+              PVector Va = new PVector(t_mp.y - f_mp.y, f_mp.x - t_mp.x).normalize().mult(laneWidth/2.0f);
               lane.normal(0.0f, 0.0f, 1.0f);
               lane.vertex(s_mp.x - Va.x, s_mp.y - Va.y, s_mp.z);
               lane.normal(0.0f, 0.0f, 1.0f);

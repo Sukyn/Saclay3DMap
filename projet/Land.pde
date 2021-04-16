@@ -21,7 +21,7 @@ class Land {
     PImage uvmap = loadImage(fileName);
 
 
-    final float tileSize = 25.0f;
+    final float tileSize = 25f;
     this.map = map;
 
     float w = (float)Map3D.width;
@@ -57,16 +57,24 @@ class Land {
         PVector ntr = tr.toNormal();
         PVector nbr = br.toNormal();
         this.satellite.normal(nbl.x, nbl.y, nbl.z);
+        this.satellite.attrib("heat", 0.0f, 0.0f);
         this.satellite.vertex(bl.x, bl.y, bl.z, u, v);
         this.satellite.normal(ntl.x, ntl.y, ntl.z);
-        this.satellite.vertex(tl.x, tl.y, tl.z, u+tileSize/5, v);
+        this.satellite.attrib("heat", 0.0f, 0.0f);
+        this.satellite.vertex(tl.x, tl.y, tl.z, u+tileSize*uvmap.width/5000, v);
         this.satellite.normal(ntr.x, ntr.y, ntr.z);
-        this.satellite.vertex(tr.x, tr.y, tr.z, u+tileSize/5, v+tileSize/5);
+        this.satellite.attrib("heat", 0.0f, 0.0f);
+        this.satellite.vertex(tr.x, tr.y, tr.z, u+tileSize*uvmap.width/5000, v+tileSize*uvmap.height/3000);
         this.satellite.normal(nbr.x, nbr.y, nbr.z);
-        this.satellite.vertex(br.x, br.y, br.z, u, v+tileSize/5);
-        v += tileSize/5;
+        this.satellite.attrib("heat", 0.0f, 0.0f);
+        this.satellite.vertex(br.x, br.y, br.z, u, v+tileSize*uvmap.height/3000);
+
+
+  //      v += tileSize*200/uvmap.width;
+        v += tileSize*uvmap.height/3000;
       }
-      u += tileSize/5;
+      u += tileSize*uvmap.width/5000;
+  //    u += tileSize*80/uvmap.height;
     }
     this.satellite.endShape();
 

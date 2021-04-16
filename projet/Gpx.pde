@@ -104,7 +104,7 @@ class Gpx {
     shape(this.track);
     shape(this.posts);
     shape(this.thumbtracks);
-    if (this.selectedPosition != -1)
+    if (this.selectedPosition != -1 && this.track.isVisible())
       description(this.selectedPosition, camera);
   }
 
@@ -139,7 +139,7 @@ class Gpx {
     lights();
     fill(0xFFFFFFFF);
     PVector hit = this.thumbtracks.getVertex(v);
-    translate(hit.x, hit.y, hit.z + 10.0f);
+    translate(hit.x, hit.y, hit.z + 50.0f);
     rotateZ(-camera.longitude-HALF_PI);
     rotateX(-camera.colatitude);
     g.hint(PConstants.DISABLE_DEPTH_TEST);

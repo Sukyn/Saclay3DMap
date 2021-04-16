@@ -6,6 +6,8 @@ class Camera {
   float x;
   float y;
   float z;
+  float pos_x;
+  float pos_y;
   boolean lightning;
 
   public Camera(float longitude, float colatitude, float radius){
@@ -15,19 +17,26 @@ class Camera {
     this.x = radius*sin(colatitude)*cos(longitude);
     this.y = radius*sin(colatitude)*sin(longitude);
     this.z = radius*cos(colatitude);
+    this.pos_x = 0;
+    this.pos_y = 0;
     this.lightning = false;
   }
 
   public void update(){
     camera(
       this.x, -this.y, this.z,
-      0, 0, 0,
+      pos_x, pos_y, 0,
       0, 0, -1
       );
     // Sunny vertical lightning
-    ambientLight(0x7F, 0x7F, 0x7F);
-    if (lightning)
+
+
+    if (lightning) {
+      resetShader();
+      ambientLight(0x7F, 0x7F, 0x7F);
       directionalLight(0xA0, 0xA0, 0xA0, 0, 0, -1);
+    }
+
     lightFalloff(0.0f, 0.0f, 1.0f);
     lightSpecular(0.0f, 0.0f, 0.0f);
   }
@@ -58,5 +67,12 @@ class Camera {
 
   public void toggle(){
     this.lightning = !this.lightning;
+  }
+
+  public void x_move(float delta){
+    this.pos_x += delta;
+  }
+  public void y_move(float delta){
+    this.pos_y += delta;
   }
 }

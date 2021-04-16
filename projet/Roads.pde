@@ -152,10 +152,11 @@ class Roads {
 
                 } else {
                   // GERER LES PONTS ICI SVP
+                  // TO DO
                   lane.normal(0.0f, 0.0f, 1.0f);
-                  lane.vertex(s_mp.x - Va.x, s_mp.y - Va.y, f_mp.z);
+                  lane.vertex(s_mp.x - Va.x, s_mp.y - Va.y, s_mp.z);
                   lane.normal(0.0f, 0.0f, 1.0f);
-                  lane.vertex(s_mp.x + Va.x, s_mp.y + Va.y, f_mp.z);
+                  lane.vertex(s_mp.x + Va.x, s_mp.y + Va.y, s_mp.z);
                 }
                 f_mp = s_mp;
                 s_mp = t_mp;

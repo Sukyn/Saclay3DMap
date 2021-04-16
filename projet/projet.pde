@@ -7,12 +7,22 @@ Gpx gpx;
 Railways railways;
 Roads roads;
 Buildings buildings;
+Poi poi;
+PShader programmeShader;
+boolean shader;
 
 void setup() {
+  // Load Height Map
+  this.map = new Map3D("paris_saclay.data");
+
+  this.land = new Land(this.map,"paris_saclay.jpg");
   // Display setup
   fullScreen(P3D);
   // Setup Head Up Display
+
+  programmeShader = loadShader("myFrag.glsl", "myVert.glsl");
   this.hud = new Hud();
+
   smooth(4);
   frameRate(60);
   // Initial drawing
@@ -27,32 +37,41 @@ void setup() {
   //Make camera move easier
   hint(ENABLE_KEY_REPEAT);
 
-  // Load Height Map
-  this.map = new Map3D("paris_saclay.data");
-  this.land = new Land(this.map,"paris_saclay.jpg");
+
+
+  this.poi = new Poi(this.land);
+  this.poi.calculdistance();
+
   this.gpx = new Gpx(this.map, "trail.geojson");
   this.railways = new Railways(this.map, "railways.geojson");
   this.roads = new Roads(this.map, "roads.geojson");
 
   this.buildings = new Buildings(this.map);
+
   this.buildings.add("buildings_city.geojson", 0xFFaaaaaa);
   this.buildings.add("buildings_IPP.geojson", 0xFFCB9837);
   this.buildings.add("buildings_EDF_Danone.geojson", 0xFF3030FF);
   this.buildings.add("buildings_CEA_algorithmes.geojson", 0xFF30FF30);
   this.buildings.add("buildings_Thales.geojson", 0xFFFF3030);
   this.buildings.add("buildings_Paris_Saclay.geojson", 0xFFee00dd);
+
+  this.shader = true;
+
 }
 
 void draw(){
   background(0x40);
   this.workspace.update();
   this.camera.update();
+  programmeShader.set("on_off", this.shader);
+  shader(programmeShader);
   this.land.update();
-//  this.gpx.update();
-//  this.railways.update();
+  resetShader();
+  this.gpx.update();
+  this.railways.update();
   this.roads.update();
-//  this.buildings.update();
-//  this.hud.update(this.camera);
+  this.buildings.update();
+  this.hud.update(this.camera);
 }
 
 void keyPressed() {
@@ -78,6 +97,11 @@ void keyPressed() {
 
         // Hide/Show grid & Gizmo
         this.workspace.toggle();
+        break;
+
+      case 's':
+      case 'S':
+        this.shader = !(this.shader);
         break;
       case 'l':
       case 'L':
@@ -110,6 +134,22 @@ void keyPressed() {
       case 'b':
       case 'B':
         this.buildings.toggle();
+        break;
+      case 'z':
+      case 'Z':
+        this.camera.y_move(-10);
+        break;
+      case 'q':
+      case 'Q':
+        this.camera.x_move(-10);
+        break;
+      case 'x':
+      case 'X':
+        this.camera.y_move(10);
+        break;
+      case 'd':
+      case 'D':
+        this.camera.x_move(10);
         break;
       }
     }

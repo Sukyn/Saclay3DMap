@@ -36,9 +36,6 @@ class WorkSpace {
 
     this.gizmo.endShape();
 
-
-
-
     // Grid drawing
     this.grid = createShape();
     this.grid.beginShape(LINES);

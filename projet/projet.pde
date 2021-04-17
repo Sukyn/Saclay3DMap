@@ -1,16 +1,18 @@
-WorkSpace workspace;
-Hud hud;
-Camera camera;
-Map3D map;
-Land land;
-Gpx gpx;
-Railways railways;
-Roads roads;
-Buildings buildings;
-Poi poi;
-PShader programmeShader;
-boolean picnic;
-boolean bicycle;
+WorkSpace workspace; // Grille et espace de travail
+Hud hud; // Informations utiles sur l'écran
+Camera camera; // Gestion de la caméra
+Map3D map; // Carte sur laquelle on travaille
+Land land; // Terrain associé à la carte
+Gpx gpx; // Tracé d'un chemin avec informations
+Railways railways; // Tracé des voies ferrées
+Roads roads; // Tracé des routes
+Buildings buildings; // Tracé des bâtiments
+Poi poi; // Tracé des points d'intérêts (carte de chaleur)
+
+PShader programmeShader; // Shader pour afficher les Poi
+
+boolean picnic; // Booléen sur l'affichage des table de picnic dans le shader
+boolean bicycle; // Booléen sur l'affichage des stations velo dans le shader
 
 void setup() {
   // Load Height Map
@@ -38,8 +40,6 @@ void setup() {
   //Make camera move easier
   hint(ENABLE_KEY_REPEAT);
 
-
-
   this.poi = new Poi(this.land);
   this.poi.calculdistance();
 
@@ -48,7 +48,6 @@ void setup() {
   this.roads = new Roads(this.map, "roads.geojson");
 
   this.buildings = new Buildings(this.map);
-
   this.buildings.add("buildings_city.geojson", 0xFFaaaaaa);
   this.buildings.add("buildings_IPP.geojson", 0xFFCB9837);
   this.buildings.add("buildings_EDF_Danone.geojson", 0xFF3030FF);
@@ -65,17 +64,19 @@ void draw(){
   background(0x40);
   this.workspace.update();
   this.camera.update();
+
+   // On envoie nos booléens au shader pour pouvoir les afficher ou non
   programmeShader.set("picnic", this.picnic);
   programmeShader.set("bicycle", this.bicycle);
   shader(programmeShader);
   this.land.update();
   resetShader();
+
   this.buildings.update();
   this.gpx.update();
   this.railways.update();
   this.roads.update();
-
-  // this.hud.update(this.camera);
+  this.hud.update(this.camera);
 }
 
 void keyPressed() {
@@ -105,10 +106,12 @@ void keyPressed() {
 
       case 'f':
       case 'F':
+        // Hide/Show picnic table
         this.picnic = !(this.picnic);
         break;
       case 'v':
       case 'V':
+        // Hide/Show bicycle station
         this.bicycle = !(this.bicycle);
         break;
       case 'l':
@@ -118,46 +121,56 @@ void keyPressed() {
         break;
       case 'r':
       case 'R':
+        // Hide/Show roads and railways
         this.railways.toggle();
         this.roads.toggle();
         break;
       case '+':
       case 'p':
       case 'P':
+        // Zoom in
         this.camera.adjustRadius(-10);
         break;
       case 'g':
       case 'G':
+        // Hide/Show gpx
         this.gpx.toggle();
         break;
       case '-':
       case 'm':
       case 'M':
+        // Zoom out
         this.camera.adjustRadius(10);
         break;
       case 'c':
       case 'C':
+        // Hide/Show lights
         this.camera.toggle();
         break;
       case 'b':
       case 'B':
+        // Hide/Show buildings
         this.buildings.toggle();
         break;
       case 'z':
       case 'Z':
-        this.camera.y_move(-10);
+        // Look to the top
+        this.camera.y_move(-20);
         break;
       case 'q':
       case 'Q':
-        this.camera.x_move(-10);
+        // Look to the left
+        this.camera.x_move(-20);
         break;
       case 's':
       case 'S':
-        this.camera.y_move(10);
+        // Look to the bottom
+        this.camera.y_move(20);
         break;
       case 'd':
       case 'D':
-        this.camera.x_move(10);
+        // Look to the right
+        this.camera.x_move(20);
         break;
       }
     }
@@ -182,5 +195,6 @@ void mouseDragged() {
 
 void mousePressed() {
   if (mouseButton == LEFT)
+    // Selection du gpx selectionné
     this.gpx.clic(mouseX, mouseY);
 }

@@ -3,20 +3,27 @@ class Poi {
 
   Land land;
 
+  /**
+  * Constructeur de la classe
+  * @params land : Le terrain sur lequel on travaille
+  */
   Poi(Land land){
     this.land = land;
   }
 
-  // ArrayList de PVector qui contient des GeoPoint
+  /**
+  * Fonction qui récupère les points d'un fichier
+  * @params fileName : le nom du fichier geojson
+  * @return la liste des PVector associés au fichier
+  */
   ArrayList<PVector> getPoints(String fileName){
 
+    // On vérifie que le fichier existe
     File ressource = dataFile(fileName);
     if (!ressource.exists() || ressource.isDirectory()) {
       println("ERROR: Trail file " + fileName + " not found.");
       exitActual();
     }
-
-
 
     // Load geojson and check features collection
     JSONObject geojson = loadJSONObject(fileName);
@@ -32,21 +39,28 @@ class Poi {
       println("WARNING: GeoJSON file doesn't contain any feature.");
     }
 
+    // On crée un nouveau tableau
     ArrayList<PVector> result = new ArrayList<PVector>();
 
+    // Pour chaque point de notre fichier, on l'ajoute à notre tableau de PVector
     for (int f = 0; f < features.size(); f++){
       JSONObject feature = features.getJSONObject(f);
       if (!feature.hasKey("geometry"))
         break;
 
-       JSONArray point = feature.getJSONObject("geometry").getJSONArray("coordinates");
-       Map3D.GeoPoint gp = this.land.map.new GeoPoint(point.getFloat(0), point.getFloat(1));
-       Map3D.ObjectPoint mp = this.land.map.new ObjectPoint(gp);
-       result.add(mp.toVector());
+      JSONArray point = feature.getJSONObject("geometry").getJSONArray("coordinates");
+      Map3D.GeoPoint gp = this.land.map.new GeoPoint(point.getFloat(0), point.getFloat(1));
+      Map3D.ObjectPoint mp = this.land.map.new ObjectPoint(gp);
+      result.add(mp.toVector());
     }
+    
   return result;
   }
 
+  /**
+  * Procédure de calcul des distances entre
+  * les points d'intérets et notre terrain
+  */
   void calculdistance(){
     // Getting points of interests
     ArrayList<PVector> bykeparking = this.getPoints("bicycle.geojson");

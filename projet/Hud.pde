@@ -5,14 +5,17 @@ class Hud {
      this.hud = g.getMatrix((PMatrix3D) null);
   }
 
+  // On prépare le terrain pour la construction de l'HUD
   private void begin() {
     g.noLights();
     g.pushMatrix();
+    // On le fait passer au dessus des autres formes
     g.hint(PConstants.DISABLE_DEPTH_TEST);
     g.resetMatrix();
     g.applyMatrix(this.hud);
   }
 
+  // Et on nettoie derrière nous
   private void end() {
     g.hint(PConstants.ENABLE_DEPTH_TEST);
     g.popMatrix();
@@ -48,6 +51,7 @@ class Hud {
     text(" Radius   "+ String.valueOf((int)camera.radius) + " m",80, 110);
   }
   public void displayHelp(){
+    // Top right area
     noStroke();
     fill(96);
     rectMode(CORNER);

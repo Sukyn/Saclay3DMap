@@ -50,34 +50,35 @@ class Buildings {
 
       case "Polygon":
 
-        PShape walls = createShape();
-        PShape roof = createShape();
-        roof.beginShape();
-        walls.beginShape(QUAD_STRIP);
-        roof.fill(couleur);
-        walls.fill(couleur);
-        roof.emissive(0x60);
-        walls.emissive(0x30);
         // Note : Il faudrait calculer les normales (cf. fin de l'énoncé)
         JSONArray coordinates = geometry.getJSONArray("coordinates");
-          for (int p=0; p < coordinates.size(); p++) {
-              JSONArray building_numero = coordinates.getJSONArray(p);
-              for (int h = 0; h < building_numero.size(); h++) {
-                JSONArray point_array = building_numero.getJSONArray(h);
-                Map3D.GeoPoint geopoint = this.map.new GeoPoint(point_array.getFloat(0), point_array.getFloat(1));
-                Map3D.ObjectPoint mp = this.map.new ObjectPoint(geopoint);
-                if (mp.inside()){
-                  float top = Map3D.heightScale*3.0f*(float)levels;
-                  roof.vertex(mp.x, mp.y, mp.z + top);
-                  walls.vertex(mp.x, mp.y, mp.z);
-                  walls.vertex(mp.x, mp.y, mp.z + top);
-                }
-              }
+        for (int p=0; p < coordinates.size(); p++) {
+          PShape walls = createShape();
+          PShape roof = createShape();
+          roof.beginShape(POLYGON);
+          walls.beginShape(QUAD_STRIP);
+          roof.fill(couleur);
+          walls.fill(couleur);
+          roof.emissive(0x60);
+          walls.emissive(0x30);
+          JSONArray building_numero = coordinates.getJSONArray(p);
+          for (int h = 0; h < building_numero.size(); h++) {
+            JSONArray point_array = building_numero.getJSONArray(h);
+            Map3D.GeoPoint geopoint = this.map.new GeoPoint(point_array.getFloat(0), point_array.getFloat(1));
+            Map3D.ObjectPoint mp = this.map.new ObjectPoint(geopoint);
+            if (mp.inside()){
+              float top = Map3D.heightScale*3.0f*(float)levels;
+              roof.vertex(mp.x, mp.y, mp.z + top);
+              walls.vertex(mp.x, mp.y, mp.z);
+              walls.vertex(mp.x, mp.y, mp.z + top);
             }
-        walls.endShape();
-        roof.endShape();
-        this.buildings.addChild(roof);
-        this.buildings.addChild(walls);
+          }
+          walls.endShape();
+          roof.endShape(CLOSE);
+          this.buildings.addChild(roof);
+          this.buildings.addChild(walls);
+          }
+
         break;
 
       default:

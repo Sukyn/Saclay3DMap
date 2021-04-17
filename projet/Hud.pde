@@ -51,26 +51,27 @@ class Hud {
     noStroke();
     fill(96);
     rectMode(CORNER);
-    rect(width-200, 10, 180, 285, 5, 5, 5, 5);
+    rect(width-220, 10, 200, 305, 5, 5, 5, 5);
     // Value
     fill(0xF0);
     textMode(SHAPE);
     textSize(20);
     textAlign(CENTER, CENTER);
-    text("Commandes", width-110, 20);
+    text("Commandes", width-120, 20);
     textSize(17);
-    text("Camera", width-110, 50);
+    text("Camera", width-120, 50);
     textSize(14);
-    text("Déplacement : Flèches", width-110, 70);
-    text("Zoom avant : P", width-110, 90);
-    text("Zoom arrière : M", width-110, 110);
+    text("Déplacement : Flèches, ZQSD", width-120, 70);
+    text("Zoom avant : P", width-120, 90);
+    text("Zoom arrière : M", width-120, 110);
     textSize(17);
-    text("Buildings : B", width-110, 150);
-    text("Routes : R", width-110, 175);
-    text("Shader : S", width-110, 200);
-    text("Texture du sol : L", width-110, 225);
-    text("Lumière : C", width-110, 250);
-    text("Tracé GPX : G", width-110, 275);
+    text("Buildings : B", width-120, 150);
+    text("Routes : R", width-120, 175);
+    text("Shader vélo : V", width-120, 200);
+    text("Shader picnic : F", width-120, 225);
+    text("Texture du sol : L", width-120, 250);
+    text("Lumière : C", width-120, 275);
+    text("Tracé GPX : G", width-120, 300);
   }
 
   public void update(Camera camera) {

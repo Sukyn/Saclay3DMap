@@ -7,11 +7,12 @@ class Gpx {
   JSONArray features;
   int selectedPosition;
   Map3D map;
+  int height = 80;
 
   public Gpx(Map3D map, String fileName){
     this.map = map;
     this.selectedPosition = -1;
-    int height = 30;
+
 
     File ressource = dataFile(fileName);
     if (!ressource.exists() || ressource.isDirectory()) {
@@ -45,11 +46,11 @@ class Gpx {
     this.thumbtracks = createShape();
     this.thumbtracks.beginShape(POINTS);
 
-    this.track.strokeWeight(1.5);
-    this.track.stroke(0, 0, 255);
-    this.posts.strokeWeight(1.8);
-    this.thumbtracks.stroke(0xFFFF3F3F);
-    this.thumbtracks.strokeWeight(10);
+    this.track.strokeWeight(3.5);
+    this.track.stroke(255, 0, 0);
+    this.posts.strokeWeight(3.8);
+    this.posts.stroke(100, 0, 0);
+    this.thumbtracks.strokeWeight(30);
     this.thumbtracks.stroke(0xFFFF3F3F);
     for (int f=0; f<features.size(); f++) {
 
@@ -84,8 +85,8 @@ class Gpx {
           Map3D.GeoPoint gp = this.map.new GeoPoint(point.getFloat(0), point.getFloat(1));
           Map3D.ObjectPoint mp = this.map.new ObjectPoint(gp);
           this.posts.vertex(mp.x, mp.y, mp.z);
-          this.posts.vertex(mp.x, mp.y, mp.z+height);
-          this.thumbtracks.vertex(mp.x, mp.y, mp.z+height);
+          this.posts.vertex(mp.x, mp.y, mp.z+this.height);
+          this.thumbtracks.vertex(mp.x, mp.y, mp.z+this.height);
         }
         break;
 
@@ -136,10 +137,9 @@ class Gpx {
     String description = "Pas d'information";
     description = this.features.getJSONObject(v+1).getJSONObject("properties").getString("desc", description);
     pushMatrix();
-    lights();
     fill(0xFFFFFFFF);
     PVector hit = this.thumbtracks.getVertex(v);
-    translate(hit.x, hit.y, hit.z + 50.0f);
+    translate(hit.x, hit.y, hit.z + this.height);
     rotateZ(-camera.longitude-HALF_PI);
     rotateX(-camera.colatitude);
     g.hint(PConstants.DISABLE_DEPTH_TEST);

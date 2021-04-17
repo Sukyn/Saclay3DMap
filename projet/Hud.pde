@@ -21,6 +21,10 @@ class Hud {
     g.popMatrix();
   }
 
+
+  /**
+  * Procédure d'affichage des FPS
+  */
   private void displayFPS() {
     // Bottom left area
     noStroke();
@@ -34,6 +38,10 @@ class Hud {
     textAlign(CENTER, CENTER);
     text(String.valueOf((int)frameRate) + " fps", 40, height-20);
   }
+
+  /**
+  * Procédure d'affichage des informations de la caméra
+  */
   public void displayCamera(Camera camera){
     // Top left area
     noStroke();
@@ -46,10 +54,14 @@ class Hud {
     textSize(14);
     textAlign(CENTER, CENTER);
     text("Camera", 120, 20);
-    text(" Longitude   "+ String.valueOf((int)(camera.longitude*180/PI) + " °"),80, 50);
-    text(" Colatitude   "+ String.valueOf((int)(camera.colatitude*180/PI) + " °"),80, 80);
-    text(" Radius   "+ String.valueOf((int)camera.radius) + " m",80, 110);
+    text("Longitude  "+ String.valueOf((int)(camera.longitude*180/PI) + " °"),100, 50);
+    text("Colatitude   "+ String.valueOf((int)(camera.colatitude*180/PI) + " °"),100, 80);
+    text("Radius   "+ String.valueOf((int)camera.radius) + " m",100, 110);
   }
+
+  /**
+  * Procédure d'affichage du menu des commandes
+  */
   public void displayHelp(){
     // Top right area
     noStroke();
@@ -78,6 +90,10 @@ class Hud {
     text("Tracé GPX : G", width-120, 300);
   }
 
+
+  /**
+  * Procédure d'affichage du HUD
+  */
   public void update(Camera camera) {
     this.begin();
     this.displayFPS();

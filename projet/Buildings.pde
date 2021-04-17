@@ -130,10 +130,16 @@ class Buildings {
     }
   }
 
+  /**
+  * Procédure d'affichage de la forme
+  */
   void update() {
     shape(this.buildings);
   }
 
+  /**
+  * Procédure pour rendre visible la forme
+  */
   void toggle(){
     this.buildings.setVisible(!this.buildings.isVisible());
   }

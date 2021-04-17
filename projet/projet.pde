@@ -8,6 +8,7 @@ Railways railways; // Tracé des voies ferrées
 Roads roads; // Tracé des routes
 Buildings buildings; // Tracé des bâtiments
 Poi poi; // Tracé des points d'intérêts (carte de chaleur)
+float sensibility; // Sensibilité des commandes de déplacement
 
 PShader programmeShader; // Shader pour afficher les Poi
 
@@ -57,7 +58,7 @@ void setup() {
 
   this.picnic = true;
   this.bicycle = true;
-
+  this.sensibility = 10;
 }
 
 void draw(){
@@ -83,16 +84,16 @@ void keyPressed() {
   if (key == CODED){
     switch(keyCode){
       case UP:
-        this.camera.adjustColatitude(-PI/100);
+        this.camera.adjustColatitude(-PI*this.sensibility/1000);
         break;
       case DOWN:
-        this.camera.adjustColatitude(PI/100);
+        this.camera.adjustColatitude(PI*this.sensibility/1000);
         break;
       case LEFT:
-        this.camera.adjustLongitude(-PI/100);
+        this.camera.adjustLongitude(-PI*this.sensibility/1000);
         break;
       case RIGHT:
-        this.camera.adjustLongitude(PI/100);
+        this.camera.adjustLongitude(PI*this.sensibility/1000);
         break;
     }
   } else {
@@ -129,7 +130,7 @@ void keyPressed() {
       case 'p':
       case 'P':
         // Zoom in
-        this.camera.adjustRadius(-10);
+        this.camera.adjustRadius(-this.sensibility);
         break;
       case 'g':
       case 'G':
@@ -140,7 +141,7 @@ void keyPressed() {
       case 'm':
       case 'M':
         // Zoom out
-        this.camera.adjustRadius(10);
+        this.camera.adjustRadius(this.sensibility);
         break;
       case 'c':
       case 'C':
@@ -155,22 +156,33 @@ void keyPressed() {
       case 'z':
       case 'Z':
         // Look to the top
-        this.camera.y_move(-20);
+        this.camera.y_move(-2*this.sensibility);
         break;
       case 'q':
       case 'Q':
         // Look to the left
-        this.camera.x_move(-20);
+        this.camera.x_move(-2*this.sensibility);
         break;
       case 's':
       case 'S':
         // Look to the bottom
-        this.camera.y_move(20);
+        this.camera.y_move(2*this.sensibility);
         break;
       case 'd':
       case 'D':
         // Look to the right
-        this.camera.x_move(20);
+        this.camera.x_move(2*this.sensibility);
+        break;
+      case 'o':
+      case 'O':
+        // Augmentation de la sensibilité
+        this.sensibility += 1;
+        break;
+      case 'i':
+      case 'I':
+        // Diminution de la sensibilité
+        if (this.sensibility > 0)
+        this.sensibility -= 1;
         break;
       }
     }
@@ -186,10 +198,10 @@ void mouseDragged() {
   if (mouseButton== CENTER){
     // Camera Horizontal
     float dx = mouseX - pmouseX;
-    this.camera.adjustLongitude(dx*0.002);
+    this.camera.adjustLongitude(dx*2*this.sensibility/10000);
     // Camera Vertical
     float dy = mouseY - pmouseY;
-    this.camera.adjustColatitude(dy*0.002);
+    this.camera.adjustColatitude(dy*2*this.sensibility/10000);
   }
 }
 

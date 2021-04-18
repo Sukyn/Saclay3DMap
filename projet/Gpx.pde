@@ -45,7 +45,7 @@ class Gpx {
       exitActual();
     }
 
-    // Load geojson and check features collection
+    // Charge geojson et vérifie les fonctionnalités
     JSONObject geojson = loadJSONObject(fileName);
     if (!geojson.hasKey("type")) {
       println("WARNING: Invalid GeoJSON file.");
@@ -55,7 +55,7 @@ class Gpx {
       return;
     }
 
-    // Parse features
+    // Analyse les fonctionnalités
     this.features =  geojson.getJSONArray("features");
     if (features == null) {
       println("WARNING: GeoJSON file doesn't contain any feature.");
@@ -112,7 +112,7 @@ class Gpx {
 
       case "Point":
 
-        // GPX WayPoint
+        // Point de passage GPX
         if (geometry.hasKey("coordinates")) {
           JSONArray point = geometry.getJSONArray("coordinates");
           Map3D.GeoPoint gp = this.map.new GeoPoint(point.getFloat(0), point.getFloat(1));

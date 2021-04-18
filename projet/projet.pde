@@ -16,29 +16,29 @@ boolean picnic; // Booléen sur l'affichage des table de picnic dans le shader
 boolean bicycle; // Booléen sur l'affichage des stations velo dans le shader
 
 void setup() {
-  // Load Height Map
+  // Charge la carte des altitudes
   this.map = new Map3D("paris_saclay.data");
 
   this.land = new Land(this.map,"paris_saclay_4k.jpg");
-  // Display setup
+  // Mise en place de l'affichage
   fullScreen(P3D);
-  // Setup Head Up Display
+  // Mise en place de l'Affichage Tête Haute
 
   programmeShader = loadShader("myFrag.glsl", "myVert.glsl");
   this.hud = new Hud();
 
   smooth(4);
   frameRate(60);
-  // Initial drawing
+  // Dessin initial
   background(0x40);
-  // Prepare local coordinate system grid & gizmo
+  // Prépare les coordonnées système locales pour la grille et le gizmo
   this.workspace = new WorkSpace(250*100);
 
-  // 3D camera (X+ right / Z+ top / Y+ Front)
+  // Caméra 3D  (X+ droite / Z+ haut / Y+ Frontal)
   this.camera = new Camera(-PI/2, 1.19, 2690);
   this.camera.update();
 
-  //Make camera move easier
+  // Facilite les mouvements de caméra
   hint(ENABLE_KEY_REPEAT);
 
   this.poi = new Poi(this.land);
@@ -101,76 +101,76 @@ void keyPressed() {
       case 'w':
       case 'W':
 
-        // Hide/Show grid & Gizmo
+        // Cache/Montre la grille et le Gizmo
         this.workspace.toggle();
         break;
 
       case 'f':
       case 'F':
-        // Hide/Show picnic table
+        // Cache/Montre les tables de picnic
         this.picnic = !(this.picnic);
         break;
       case 'v':
       case 'V':
-        // Hide/Show bicycle station
+        // Cache/Montre station pour vélos
         this.bicycle = !(this.bicycle);
         break;
       case 'l':
       case 'L':
-        // Hide/Show Land
+        // Cache/Montre le terrain
         this.land.toggle();
         break;
       case 'r':
       case 'R':
-        // Hide/Show roads and railways
+        // Cache/Montre les routes et voies ferrées
         this.railways.toggle();
         this.roads.toggle();
         break;
       case '+':
       case 'p':
       case 'P':
-        // Zoom in
+        // Zoom avant
         this.camera.adjustRadius(-this.sensibility);
         break;
       case 'g':
       case 'G':
-        // Hide/Show gpx
+        // Cache/Montre le gpx
         this.gpx.toggle();
         break;
       case '-':
       case 'm':
       case 'M':
-        // Zoom out
+        // Zoom arrière
         this.camera.adjustRadius(this.sensibility);
         break;
       case 'c':
       case 'C':
-        // Hide/Show lights
+        // Cache/Montre les lumières
         this.camera.toggle();
         break;
       case 'b':
       case 'B':
-        // Hide/Show buildings
+        // Cache/Montre les bâtiments
         this.buildings.toggle();
         break;
       case 'z':
       case 'Z':
-        // Look to the top
+        // Regarder vers le haut
         this.camera.yMove(-2*this.sensibility);
         break;
       case 'q':
       case 'Q':
-        // Look to the left
+        // Regarder vers la gauche
         this.camera.xMove(-2*this.sensibility);
         break;
       case 's':
       case 'S':
-        // Look to the bottom
+        // Regarder vers le bas
         this.camera.yMove(2*this.sensibility);
         break;
       case 'd':
       case 'D':
-        // Look to the right
+        // Regarder vers la droite
         this.camera.xMove(2*this.sensibility);
         break;
       case 'o':
@@ -196,10 +196,10 @@ void mouseWheel(MouseEvent event) {
 
 void mouseDragged() {
   if (mouseButton== CENTER){
-    // Camera Horizontal
+    // Horizontale Camera 
     float dx = mouseX - pmouseX;
     this.camera.adjustLongitude(dx*2*this.sensibility/10000);
-    // Camera Vertical
+    // Verticale Camera
     float dy = mouseY - pmouseY;
     this.camera.adjustColatitude(dy*2*this.sensibility/10000);
   }

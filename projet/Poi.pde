@@ -25,7 +25,7 @@ class Poi {
       exitActual();
     }
 
-    // Load geojson and check features collection
+    // Charge geojson et vérifie les fonctionnalités
     JSONObject geojson = loadJSONObject(fileName);
     if (!geojson.hasKey("type")) {
       println("WARNING: Invalid GeoJSON file.");
@@ -33,7 +33,7 @@ class Poi {
       println("WARNING: GeoJSON file doesn't contain features collection.");
     }
 
-    // Parse features
+    // Analyse les fonctionnalités
     JSONArray features =  geojson.getJSONArray("features");
     if (features == null) {
       println("WARNING: GeoJSON file doesn't contain any feature.");
@@ -62,32 +62,32 @@ class Poi {
   * les points d'intérets et notre terrain
   */
   void calculdistance(){
-    // Getting points of interests
+    // Récupération des points d'intérêt
     ArrayList<PVector> bykeParking = this.getPoints("bicycle.geojson");
     ArrayList<PVector> picnic = this.getPoints("picnic.geojson");
 
     for (int v = 0; v < this.land.satellite.getVertexCount(); v++) {
-      // Initializing location with the targetted point
+      // Initialise l'emplacement aux point cibles
       PVector location = new PVector();
       this.land.satellite.getVertex(v, location);
-      // Initializing distances at the maximum
+      // Initialise les distances au maximum
       float nearestbykeParkingDistance = 250;
       float nearestPicNicTableDistance = 250;
-      // Calculating the nearest bykeParking station
+      // Calcule la station bykeParking la plus proche
       for (int p=0; p < bykeParking.size(); p++) {
         PVector point = bykeParking.get(p);
         float d = dist(location.x, location.y, point.x, point.y);
         if (d < nearestbykeParkingDistance)
           nearestbykeParkingDistance = d;
       }
-      // Calculating the nearest PicNic station
+      // Calcule la station picnic la plus proche
       for (int p=0; p < picnic.size(); p++) {
         PVector point = picnic.get(p);
         float d = dist(location.x, location.y, point.x, point.y);
         if (d < nearestPicNicTableDistance)
           nearestPicNicTableDistance = d;
       }
-      // Setting attributes
+      // Règle les attributs
       this.land.satellite.setAttrib("heat", v, nearestbykeParkingDistance/250, nearestPicNicTableDistance/250);
     }
   }

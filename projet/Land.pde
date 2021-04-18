@@ -1,8 +1,8 @@
 /**
-* Returns a Land object.
-* Prepares land shadow, wireframe and textured shape
-* @param map  Land associated elevation Map3D object
-* @return     Land object
+* Rend un objet Land.
+* Prépare l'ombre, la structure en fil de fer et les formes texturées de land
+* @param map  Objet Map3D correspondant à l'élévation associées à Land
+* @return     Objet Land
 */
 
 class Land {
@@ -51,7 +51,7 @@ class Land {
     float w = (float)Map3D.width;
     float h = (float)Map3D.height;
 
-    // Shadow shape
+    // Forme de l'ombre
     this.shadow = createShape();
     this.shadow.beginShape(QUADS);
     this.shadow.fill(0x992F2F2F);
@@ -126,7 +126,7 @@ class Land {
     this.wireFrame.endShape();
 
 
-    // Shapes initial visibility
+    // Visibilité initiale des formes
     this.shadow.setVisible(true);
     this.wireFrame.setVisible(false);
     this.satellite.setVisible(true);

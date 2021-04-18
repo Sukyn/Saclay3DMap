@@ -13,7 +13,7 @@ class Roads {
       exitActual();
     }
 
-    // Load geojson and check features collection
+    // Charge geojson et vérifie les fonctionnalités
     JSONObject geojson = loadJSONObject(fileName);
     if (!geojson.hasKey("type")) {
       println("WARNING: Invalid GeoJSON file.");
@@ -23,7 +23,7 @@ class Roads {
       return;
     }
 
-    // Parse features
+    // Analyse les fonctionnalités
     JSONArray features =  geojson.getJSONArray("features");
     if (features == null) {
       println("WARNING: GeoJSON file doesn't contain any feature.");
@@ -113,7 +113,7 @@ class Roads {
              println("WARNING: Roads kind not handled : ", laneKind);
              break;
       }
-      // Display threshold (increase if more performance needed...)
+      // Limite d'affichage (augmenter si besoin de meilleures performances... )
       if (laneWidth < 1.0f)
        break;
 
@@ -186,7 +186,7 @@ class Roads {
 
               } else {
                 // GERER LES PONTS ICI SVP
-                // TO DO
+                // À FAIRE
                 lane.normal(0.0f, 0.0f, 1.0f);
                 lane.vertex(sMp.x - Va.x, sMp.y - Va.y, sMp.z);
                 lane.normal(0.0f, 0.0f, 1.0f);

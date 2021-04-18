@@ -29,13 +29,13 @@ public class Map3D {
   /**
    * Map height
    */
-  final static double height = Map3D.rows *  Map3D.cellSize; 
+  final static double height = Map3D.rows *  Map3D.cellSize;
   /**
    * Lower left X origin
    */
   final static double xllCorner = 637500.00d;
   /**
-   * Lower Left Y origin 
+   * Lower Left Y origin
    */
   final static double yllCorner = 6844000.00d;
   /**
@@ -56,9 +56,9 @@ public class Map3D {
   final boolean mode3D;
 
   /**
-   * Returns a Map3D object. 
-   * 
-   * @param  fileName  IGN Alti data file name 
+   * Returns a Map3D object.
+   *
+   * @param  fileName  IGN Alti data file name
    */
   Map3D(String fileName) {
 
@@ -69,9 +69,9 @@ public class Map3D {
       exitActual();
     }
 
-    // Load RGE Alti elevation heightmap 
+    // Load RGE Alti elevation heightmap
     this.data = loadBytes(fileName);
-    
+
     // Force flat projection if false (for debug purposes)
     this.mode3D = true;
 
@@ -100,7 +100,7 @@ public class Map3D {
   }
 
   /**
-   * GeoPoint class. 
+   * GeoPoint class.
    * WGS84 Geographic coordinates
    * The WGS84 coordinates system is used by GPS
    * French RGF93 coordinate system is equivalent
@@ -187,19 +187,19 @@ public class Map3D {
      * @return           GeoPoint String representation
      */
     public String toString() {
-      return "longitude = " 
-        + String.valueOf(Math.round(this.longitude * 1e7)/1e7) 
-        + ", latitude = " 
+      return "longitude = "
+        + String.valueOf(Math.round(this.longitude * 1e7)/1e7)
+        + ", latitude = "
         + String.valueOf(Math.round(this.latitude * 1e7)/1e7)
-        + ", elevation = " 
+        + ", elevation = "
         + String.valueOf(Math.round(this.elevation * 1e7)/1e7);
     }
   }
 
   /**
-   * MapPoint class. 
-   * Lambert93 projection coordinates, 
-   * X/Y Origins are LowerLeft coordinates (xllCorner, yllCorner) 
+   * MapPoint class.
+   * Lambert93 projection coordinates,
+   * X/Y Origins are LowerLeft coordinates (xllCorner, yllCorner)
    */
   class MapPoint {
 
@@ -224,8 +224,8 @@ public class Map3D {
      */
     MapPoint(int column, int row) {
       this(
-        Map3D.xllCorner + (double)column * Map3D.cellSize, 
-        Map3D.yllCorner + (double)row * Map3D.cellSize, 
+        Map3D.xllCorner + (double)column * Map3D.cellSize,
+        Map3D.yllCorner + (double)row * Map3D.cellSize,
         0.0d
         );
     }
@@ -263,7 +263,7 @@ public class Map3D {
      */
     MapPoint(GeoPoint gp) {
       double[] lambert93 = Geodesie.lambert93(gp.longitude, gp.latitude);
-      this.xm = Math.round(lambert93[0] * 1e2d) / 1e2d; 
+      this.xm = Math.round(lambert93[0] * 1e2d) / 1e2d;
       this.ym = Math.round(lambert93[1] * 1e2d) / 1e2d;
       if (gp.elevation > 0.0d)
         this.em = gp.elevation;
@@ -290,9 +290,9 @@ public class Map3D {
      * @return           true if current point is inside Map
      */
     boolean inside() {
-      return 
+      return
         this.xm >= Map3D.xllCorner
-        && this.xm < Map3D.xllCorner + Map3D.width 
+        && this.xm < Map3D.xllCorner + Map3D.width
         && this.ym >= Map3D.yllCorner
         && this.ym < Map3D.yllCorner + Map3D.height;
     }
@@ -302,17 +302,17 @@ public class Map3D {
      * @return           MapPoint String representation
      */
     public String toString() {
-      return "xm = " 
-        + String.valueOf(Math.round(this.xm * 1e7)/1e7) 
-        + ", ym = " 
+      return "xm = "
+        + String.valueOf(Math.round(this.xm * 1e7)/1e7)
+        + ", ym = "
         + String.valueOf(Math.round(this.ym * 1e7)/1e7)
-        + ", em = " 
+        + ", em = "
         + String.valueOf(Math.round(this.em * 1e7)/1e7);
     }
   }
 
   /**
-   * ObjectPoint class. 
+   * ObjectPoint class.
    * Object space coordinates, centered at 0,0,0
    * Visible viewport bounds :
    * X from -map width/2 (left) to +map width/2 (right)
@@ -400,7 +400,7 @@ public class Map3D {
     }
 
     /**
-     * Check if current point is inside valid Object space area 
+     * Check if current point is inside valid Object space area
      * @return           true if current point is inside Map
      */
     boolean inside() {
@@ -412,11 +412,11 @@ public class Map3D {
      * @return           ObjectPoint String representation
      */
     public String toString() {
-      return "x = " 
-        + String.valueOf(Math.round(this.x * 1e2)/1e2) 
-        + ", y = " 
+      return "x = "
+        + String.valueOf(Math.round(this.x * 1e2)/1e2)
+        + ", y = "
         + String.valueOf(Math.round(this.y * 1e2)/1e2)
-        + ", z = " 
+        + ", z = "
         + String.valueOf(Math.round(this.z * 1e2)/1e2);
     }
   }
@@ -459,7 +459,7 @@ static class Geodesie {
     static double xs = 700000.0d, ys = 12655612.05d;
     // Latitude du méridien d'origine
     //static double phi0 = Math.toRadians(46.5d); // latitude origine 46° 30' 0.0" N
-    // Longitude du méridien d'origine 
+    // Longitude du méridien d'origine
     static double lambda0 = Math.toRadians(3.0d); // Méridien central
     // Longitude du 1er parallèle automécoïque
     //static double phi1 = Math.toRadians(44.0d); // Parrallèle 1 44° 0' 0.0" N
@@ -480,7 +480,7 @@ static class Geodesie {
   }
 
   /**
-   * Convert Lambert93 Map projection x,y (meters) into WGS84 longitude, latitude (decimal degrees)  
+   * Convert Lambert93 Map projection x,y (meters) into WGS84 longitude, latitude (decimal degrees)
    * @param  xm :      X coordinate, Lambert 93 projection (meters)
    * @param  ym :      Y coordinate, Lambert 93 projection (meters)
    * @return           WGS84 coordinates array (Decimal degrees)
@@ -568,19 +568,19 @@ static class Geodesie {
 
   //  // alg01 - Calcul de la latitude isométrique sur ellipsoide de 1ère excentricité e au point de latitude Phi
   //  System.out.println("Attendu -> 1.00552653648");
-  //  System.out.println("Obtenu  -> " + truncate(alg01(0.872664626d, 0.08199188998d), 11)); 
+  //  System.out.println("Obtenu  -> " + truncate(alg01(0.872664626d, 0.08199188998d), 11));
   //  System.out.println("Attendu -> -0.3026169006");
-  //  System.out.println("Obtenu  -> " + truncate(alg01(-0.29999999997d, 0.08199188998d), 11)); 
+  //  System.out.println("Obtenu  -> " + truncate(alg01(-0.29999999997d, 0.08199188998d), 11));
   //  System.out.println("Attendu -> 0.2");
-  //  System.out.println("Obtenu  -> " + truncate(alg01(0.19998903369d, 0.08199188998d), 11)); 
+  //  System.out.println("Obtenu  -> " + truncate(alg01(0.19998903369d, 0.08199188998d), 11));
 
   //  // alg02 - Calcul de la latitude à partir de la latitude isométrique
   //  System.out.println("Attendu -> 0.872664626");
-  //  System.out.println("Obtenu  -> " + truncate(alg02(1.00552653648d, 0.08199188998d), 11)); 
+  //  System.out.println("Obtenu  -> " + truncate(alg02(1.00552653648d, 0.08199188998d), 11));
   //  System.out.println("Attendu -> -0.29999999997");
-  //  System.out.println("Obtenu  -> " + truncate(alg02(-0.3026169006d, 0.08199188998d), 11)); 
+  //  System.out.println("Obtenu  -> " + truncate(alg02(-0.3026169006d, 0.08199188998d), 11));
   //  System.out.println("Attendu -> 0.19998903369");
-  //  System.out.println("Obtenu  -> " + truncate(alg02(0.2d, 0.08199188998d), 11)); 
+  //  System.out.println("Obtenu  -> " + truncate(alg02(0.2d, 0.08199188998d), 11));
 
   //  double e, n, c, lambda0, xs, ys;
 

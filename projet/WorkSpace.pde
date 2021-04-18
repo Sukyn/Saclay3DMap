@@ -9,7 +9,7 @@ class WorkSpace {
     this.gizmo.beginShape(LINES);
     this.gizmo.noFill();
 
-    // Red X
+    // Rouge X
     this.gizmo.stroke(0xAAFF3F7F);
     this.gizmo.strokeWeight(1.0f);
     this.gizmo.vertex(-size/2, 0, 0);
@@ -17,7 +17,7 @@ class WorkSpace {
     this.gizmo.strokeWeight(3.0f);
     this.gizmo.vertex(0, 0, 0);
     this.gizmo.vertex(size/100, 0, 0);
-    // Green Y
+    // Vert Y
     this.gizmo.stroke(0xAA3FFF7F);
     this.gizmo.strokeWeight(1.0f);
     this.gizmo.vertex(0,-size/2,  0);
@@ -25,7 +25,7 @@ class WorkSpace {
     this.gizmo.strokeWeight(3.0f);
     this.gizmo.vertex(0,0,  0);
     this.gizmo.vertex(0,size/100,  0);
-    // Blue Z
+    // Bleu Z
     this.gizmo.stroke(0xAA3F7FFF);
     this.gizmo.strokeWeight(1.0f);
     this.gizmo.vertex(0,  0,-size/2);
@@ -36,7 +36,7 @@ class WorkSpace {
 
     this.gizmo.endShape();
 
-    // Grid drawing
+    // Dessin de la grille
     this.grid = createShape();
     this.grid.beginShape(LINES);
     this.grid.noFill();
@@ -52,7 +52,7 @@ class WorkSpace {
   }
 
   /**
-  * Update Gizmo
+  * Mise à jour du Gizmo
   */
   public void update(){
     shape(this.grid);
@@ -61,7 +61,7 @@ class WorkSpace {
   }
 
   /**
-  * Toggle Grid & Gizmo visibility.
+  * Active/désactive la visibilité de la grille et du Gizmo.
   */
   public void toggle() {
      this.gizmo.setVisible(!this.gizmo.isVisible());

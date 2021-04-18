@@ -56,7 +56,7 @@ class Camera {
 
     if (lightning) {
       // LUMIERE MAESTRO !
-      // Sunny vertical lightning
+      // Éclairage solaire vertical
       ambientLight(0x7F, 0x7F, 0x7F);
       directionalLight(0xA0, 0xA0, 0xA0, 0, 0, -1);
       lightFalloff(0.0f, 0.0f, 1.0f);

@@ -20,7 +20,7 @@ class Railways {
       exitActual();
     }
 
-    // Load geojson and check features collection
+    // Charge geojson et vérifie les fonctionnalités
     JSONObject geojson = loadJSONObject(fileName);
     if (!geojson.hasKey("type")) {
       println("WARNING: Invalid GeoJSON file.");
@@ -30,7 +30,7 @@ class Railways {
       return;
     }
 
-    // Parse features
+    // Analyse les fonctionnalités
     JSONArray features =  geojson.getJSONArray("features");
     if (features == null) {
       println("WARNING: GeoJSON file doesn't contain any feature.");

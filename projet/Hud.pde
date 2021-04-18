@@ -1,7 +1,7 @@
 class Hud {
   private PMatrix3D hud;
   Hud() {
-     // Should be constructed just after P3D size() or fullScreen()
+     // Devrait être construit juste après P3D size() ou fullScreen()
      this.hud = g.getMatrix((PMatrix3D) null);
   }
 
@@ -26,12 +26,12 @@ class Hud {
   * Procédure d'affichage des FPS
   */
   private void displayFPS() {
-    // Bottom left area
+    // Zone en bas à gauche
     noStroke();
     fill(96);
     rectMode(CORNER);
     rect(10, height-30, 60, 20, 5, 5, 5, 5);
-    // Value
+    // Valeur
     fill(0xF0);
     textMode(SHAPE);
     textSize(14);
@@ -43,12 +43,12 @@ class Hud {
   * Procédure d'affichage des informations de la caméra
   */
   public void displayCamera(Camera camera){
-    // Top left area
+    // Zone en haut à gauche
     noStroke();
     fill(96);
     rectMode(CORNER);
     rect(20, 10, 200, 130, 5, 5, 5, 5);
-    // Value
+    // Valeur
     fill(0xF0);
     textMode(SHAPE);
     textSize(14);
@@ -63,12 +63,12 @@ class Hud {
   * Procédure d'affichage du menu des commandes
   */
   public void displayHelp(){
-    // Top right area
+    // Zone en haut à droite
     noStroke();
     fill(96);
     rectMode(CORNER);
     rect(width-220, 10, 200, 305, 5, 5, 5, 5);
-    // Value
+    // Valeur
     fill(0xF0);
     textMode(SHAPE);
     textSize(20);

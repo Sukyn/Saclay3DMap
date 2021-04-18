@@ -15,7 +15,7 @@ class Gpx {
   /**
   * Forme des boules des épingles
   */
-  PShape thumbtracks;
+  PShape thumbTracks;
 
   JSONArray features;
 
@@ -72,15 +72,15 @@ class Gpx {
     this.posts.beginShape(LINES);
 
     // La boule de l'épingle
-    this.thumbtracks = createShape();
-    this.thumbtracks.beginShape(POINTS);
+    this.thumbTracks = createShape();
+    this.thumbTracks.beginShape(POINTS);
 
     this.track.strokeWeight(3.5); // Taille
     this.track.stroke(255, 0, 0); // Couleur
     this.posts.strokeWeight(3.8);
     this.posts.stroke(100, 0, 0);
-    this.thumbtracks.strokeWeight(30);
-    this.thumbtracks.stroke(0xFFFF3F3F);
+    this.thumbTracks.strokeWeight(30);
+    this.thumbTracks.stroke(0xFFFF3F3F);
 
     // Pour chaque élement de notre tracé GPX, on relie les points
     for (int f=0; f<features.size(); f++) {
@@ -120,7 +120,7 @@ class Gpx {
           // On construit nos épingles
           this.posts.vertex(mp.x, mp.y, mp.z);
           this.posts.vertex(mp.x, mp.y, mp.z+this.height);
-          this.thumbtracks.vertex(mp.x, mp.y, mp.z+this.height);
+          this.thumbTracks.vertex(mp.x, mp.y, mp.z+this.height);
         }
         break;
 
@@ -132,7 +132,7 @@ class Gpx {
     }
     this.track.endShape();
     this.posts.endShape();
-    this.thumbtracks.endShape();
+    this.thumbTracks.endShape();
   }
 
   /**
@@ -141,7 +141,7 @@ class Gpx {
   void update(){
     shape(this.track);
     shape(this.posts);
-    shape(this.thumbtracks);
+    shape(this.thumbTracks);
     // Si une épingle est selectionnée, on affiche la description associée
     if (this.selectedPosition != -1 && this.track.isVisible())
       description(this.selectedPosition, camera);
@@ -153,7 +153,7 @@ class Gpx {
   void toggle(){
     this.track.setVisible(!this.track.isVisible());
     this.posts.setVisible(!this.posts.isVisible());
-    this.thumbtracks.setVisible(!this.thumbtracks.isVisible());
+    this.thumbTracks.setVisible(!this.thumbTracks.isVisible());
   }
 
 
@@ -163,29 +163,29 @@ class Gpx {
   void clic(int mouseX, int mouseY) {
 
     // On initialize la distance minimale à la taille du terrain
-    float min_dist = dist(0, 0, (int)this.map.width, (int)this.map.height);
+    float minDist = dist(0, 0, (int)this.map.width, (int)this.map.height);
 
     // Et on recherche quel est l'épingle la' plus proche
-    for (int v = 0; v < this.thumbtracks.getVertexCount(); v++){
+    for (int v = 0; v < this.thumbTracks.getVertexCount(); v++){
 
-      PVector hit = this.thumbtracks.getVertex(v);
+      PVector hit = this.thumbTracks.getVertex(v);
 
       // Pour chaque épingle, on calcule sa distance au point cliqué
       float d = dist(screenX(hit.x, hit.y, hit.z), screenY(hit.x, hit.y, hit.z), mouseX, mouseY);
       // Et on stock la plus proche
-      if (d < min_dist) {
-        min_dist = d;
+      if (d < minDist) {
+        minDist = d;
         this.selectedPosition = v;
       }
 
     }
     // On affiche la couleur de l'épingle différemment pour montrer
     // qu'elle est sélectionnée
-    for (int v = 0; v < this.thumbtracks.getVertexCount(); v++){
+    for (int v = 0; v < this.thumbTracks.getVertexCount(); v++){
       if (v == this.selectedPosition){
-          this.thumbtracks.setStroke(v, 0xFF3FFF7F);
+          this.thumbTracks.setStroke(v, 0xFF3FFF7F);
       } else
-          this.thumbtracks.setStroke(v, 0xFFFF3F3F);
+          this.thumbTracks.setStroke(v, 0xFFFF3F3F);
     }
   }
 
@@ -201,7 +201,7 @@ class Gpx {
     // On définit la couleur du texte à blanc (arbitraire)
     fill(0xFFFFFFFF);
     // On récupère l'épingle recherchée
-    PVector hit = this.thumbtracks.getVertex(v);
+    PVector hit = this.thumbTracks.getVertex(v);
     // Et on se positionne par rapport à ses coordonnées
     translate(hit.x, hit.y, hit.z + this.height);
 
@@ -218,7 +218,7 @@ class Gpx {
     textAlign(LEFT, CENTER);
     text(description, 0, 0);
     g.hint(PConstants.ENABLE_DEPTH_TEST);
-    
+
     popMatrix();
   }
 }

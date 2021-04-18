@@ -10,8 +10,8 @@ class Camera {
   float y;
   float z;
   // Coordonnées de déplacement de la caméra
-  float pos_x;
-  float pos_y;
+  float posX;
+  float posY;
   // Variable indiquant si on affiche la lumière ou non
   boolean lightning;
 
@@ -35,8 +35,8 @@ class Camera {
     this.z = radius*cos(colatitude);
 
     // Variables modifiées par l'utilisateur
-    this.pos_x = 0;
-    this.pos_y = 0;
+    this.posX = 0;
+    this.posY = 0;
     this.lightning = false;
   }
 
@@ -50,7 +50,7 @@ class Camera {
     */
     camera(
       this.x, -this.y, this.z,
-      pos_x, pos_y, 0,
+      posX, posY, 0,
       0, 0, -1
       );
 
@@ -116,13 +116,13 @@ class Camera {
   /**
   * Gestion de l'orientation de la vision horizontale
   */
-  public void x_move(float delta){
-    this.pos_x += delta;
+  public void xMove(float delta){
+    this.posX += delta;
   }
   /**
   * Gestion de l'orientation de la vision verticale
   */
-  public void y_move(float delta){
-    this.pos_y += delta;
+  public void yMove(float delta){
+    this.posY += delta;
   }
 }

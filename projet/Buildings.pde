@@ -93,12 +93,12 @@ class Buildings {
             walls.emissive(0x30);
 
             // On construit maintenant la forme de notre bâtiment
-            JSONArray building_numero = coordinates.getJSONArray(p);
-            for (int h = 0; h < building_numero.size(); h++) {
+            JSONArray buildingNumero = coordinates.getJSONArray(p);
+            for (int h = 0; h < buildingNumero.size(); h++) {
 
               // On récupère les coordonnées stockées dans notre fichier
-              JSONArray point_array = building_numero.getJSONArray(h);
-              Map3D.GeoPoint geopoint = this.map.new GeoPoint(point_array.getFloat(0), point_array.getFloat(1));
+              JSONArray pointArray = buildingNumero.getJSONArray(h);
+              Map3D.GeoPoint geopoint = this.map.new GeoPoint(pointArray.getFloat(0), pointArray.getFloat(1));
               Map3D.ObjectPoint mp = this.map.new ObjectPoint(geopoint);
               // On vérifie que le point est bien sur le plan qui nous intéresse
               if (mp.inside()){

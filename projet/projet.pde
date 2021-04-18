@@ -156,22 +156,22 @@ void keyPressed() {
       case 'z':
       case 'Z':
         // Look to the top
-        this.camera.y_move(-2*this.sensibility);
+        this.camera.yMove(-2*this.sensibility);
         break;
       case 'q':
       case 'Q':
         // Look to the left
-        this.camera.x_move(-2*this.sensibility);
+        this.camera.xMove(-2*this.sensibility);
         break;
       case 's':
       case 'S':
         // Look to the bottom
-        this.camera.y_move(2*this.sensibility);
+        this.camera.yMove(2*this.sensibility);
         break;
       case 'd':
       case 'D':
         // Look to the right
-        this.camera.x_move(2*this.sensibility);
+        this.camera.xMove(2*this.sensibility);
         break;
       case 'o':
       case 'O':

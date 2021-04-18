@@ -53,7 +53,7 @@ class Poi {
       Map3D.ObjectPoint mp = this.land.map.new ObjectPoint(gp);
       result.add(mp.toVector());
     }
-    
+
   return result;
   }
 
@@ -63,7 +63,7 @@ class Poi {
   */
   void calculdistance(){
     // Getting points of interests
-    ArrayList<PVector> bykeparking = this.getPoints("bicycle.geojson");
+    ArrayList<PVector> bykeParking = this.getPoints("bicycle.geojson");
     ArrayList<PVector> picnic = this.getPoints("picnic.geojson");
 
     for (int v = 0; v < this.land.satellite.getVertexCount(); v++) {
@@ -71,14 +71,14 @@ class Poi {
       PVector location = new PVector();
       this.land.satellite.getVertex(v, location);
       // Initializing distances at the maximum
-      float nearestBykeParkingDistance = 250;
+      float nearestbykeParkingDistance = 250;
       float nearestPicNicTableDistance = 250;
-      // Calculating the nearest BykeParking station
-      for (int p=0; p < bykeparking.size(); p++) {
-        PVector point = bykeparking.get(p);
+      // Calculating the nearest bykeParking station
+      for (int p=0; p < bykeParking.size(); p++) {
+        PVector point = bykeParking.get(p);
         float d = dist(location.x, location.y, point.x, point.y);
-        if (d < nearestBykeParkingDistance)
-          nearestBykeParkingDistance = d;
+        if (d < nearestbykeParkingDistance)
+          nearestbykeParkingDistance = d;
       }
       // Calculating the nearest PicNic station
       for (int p=0; p < picnic.size(); p++) {
@@ -88,7 +88,7 @@ class Poi {
           nearestPicNicTableDistance = d;
       }
       // Setting attributes
-      this.land.satellite.setAttrib("heat", v, nearestBykeParkingDistance/250, nearestPicNicTableDistance/250);
+      this.land.satellite.setAttrib("heat", v, nearestbykeParkingDistance/250, nearestPicNicTableDistance/250);
     }
   }
 

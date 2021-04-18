@@ -1,5 +1,4 @@
 
-
 class Buildings {
   /**
   * Forme de nos buildings

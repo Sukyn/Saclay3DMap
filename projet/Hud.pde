@@ -1,7 +1,9 @@
+import java.util.*;
+
 class Hud {
   private PMatrix3D hud;
   Hud() {
-     // Devrait être construit juste après P3D size() ou fullScreen()
+     // Should be constructed just after P3D size() or fullScreen()
      this.hud = g.getMatrix((PMatrix3D) null);
   }
 
@@ -26,12 +28,12 @@ class Hud {
   * Procédure d'affichage des FPS
   */
   private void displayFPS() {
-    // Zone en bas à gauche
+    // Bottom left area
     noStroke();
     fill(96);
     rectMode(CORNER);
     rect(10, height-30, 60, 20, 5, 5, 5, 5);
-    // Valeur
+    // Value
     fill(0xF0);
     textMode(SHAPE);
     textSize(14);
@@ -43,12 +45,12 @@ class Hud {
   * Procédure d'affichage des informations de la caméra
   */
   public void displayCamera(Camera camera){
-    // Zone en haut à gauche
+    // Top left area
     noStroke();
     fill(96);
     rectMode(CORNER);
     rect(20, 10, 200, 130, 5, 5, 5, 5);
-    // Valeur
+    // Value
     fill(0xF0);
     textMode(SHAPE);
     textSize(14);
@@ -63,42 +65,63 @@ class Hud {
   * Procédure d'affichage du menu des commandes
   */
   public void displayHelp(){
-    // Zone en haut à droite
+
+    List<String> commandes = Arrays.asList(
+      "Déplacement : Flèches, ZQSD",
+      "Zoom avant : P",
+      "Zoom arrière : M",
+      "Buildings : B",
+      "Routes : R",
+      "Shader vélo : V",
+      "Shader picnic : F",
+      "Shader restaurant : X",
+      "Texture du sol : L",
+      "Lumière : C",
+      "Tracé GPX : G",
+      "Sensibilité : O, I"
+      );
+    // Top right area
     noStroke();
     fill(96);
     rectMode(CORNER);
-    rect(width-220, 10, 200, 305, 5, 5, 5, 5);
-    // Valeur
+    rect(width-320, 10, 310, 60+25*commandes.size(), 5, 5, 5, 5);
+    // Value
     fill(0xF0);
     textMode(SHAPE);
     textSize(20);
     textAlign(CENTER, CENTER);
-    text("Commandes", width-120, 20);
-    textSize(17);
-    text("Camera", width-120, 50);
-    textSize(14);
-    text("Déplacement : Flèches, ZQSD", width-120, 70);
-    text("Zoom avant : P", width-120, 90);
-    text("Zoom arrière : M", width-120, 110);
-    textSize(17);
-    text("Buildings : B", width-120, 150);
-    text("Routes : R", width-120, 175);
-    text("Shader vélo : V", width-120, 200);
-    text("Shader picnic : F", width-120, 225);
-    text("Texture du sol : L", width-120, 250);
-    text("Lumière : C", width-120, 275);
-    text("Tracé GPX : G", width-120, 300);
+    text("Commandes", width-160, 20);
+
+    int offset = 25;
+    int position = 60;
+    for (int i = 0; i < commandes.size(); i++){
+      text(commandes.get(i), width-160, position);
+      position += offset;
+    }
   }
 
-
+  public void displaySensibility(int sensibility) {
+    // Top left area
+    noStroke();
+    fill(96);
+    rectMode(CORNER);
+    rect(width-170, height-60, 150, 40, 5, 5, 5, 5);
+    // Value
+    fill(0xF0);
+    textMode(SHAPE);
+    textSize(14);
+    textAlign(CENTER, CENTER);
+    text("Sensibilité :  "+ String.valueOf(sensibility),width-90, height-40);
+  }
   /**
   * Procédure d'affichage du HUD
   */
-  public void update(Camera camera) {
+  public void update(Camera camera, int sensibility) {
     this.begin();
     this.displayFPS();
     this.displayCamera(camera);
     this.displayHelp();
+    this.displaySensibility(sensibility);
     this.end();
   }
 }

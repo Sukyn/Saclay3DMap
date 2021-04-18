@@ -1,0 +1,710 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-ide",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2021-04-18T18:01:41Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/294272743",
+        "amenity": "restaurant",
+        "cuisine": "grill",
+        "name": "Le Bœuf à Six Pattes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1706202,
+          48.7146822
+        ]
+      },
+      "id": "node/294272743"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1345568305",
+        "addr:housenumber": "1Ter",
+        "amenity": "restaurant",
+        "cuisine": "pizza",
+        "diet:vegetarian": "yes",
+        "entrance": "yes",
+        "name": "La Guichetta",
+        "opening_hours": "Mo-Th 12:00-14:00,19:00-21:30, Fr-Sa 12:00-14:00,19:00-22:00",
+        "oven": "wood_fired",
+        "phone": "+33 1 69 29 90 34"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1908723,
+          48.7050552
+        ]
+      },
+      "id": "node/1345568305"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1635487884",
+        "addr:city": "Orsay",
+        "addr:housenumber": "2",
+        "addr:postcode": "91400",
+        "addr:street": "Place de la République",
+        "amenity": "restaurant",
+        "cuisine": "japanese",
+        "name": "Osaka",
+        "opening_hours": "Mo-Su 11:00-14:30,18:00-22:30",
+        "phone": "+33 1 64 46 18 02"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.184695,
+          48.6968087
+        ]
+      },
+      "id": "node/1635487884"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1635488070",
+        "amenity": "restaurant",
+        "cuisine": "italian;pizza",
+        "name": "Le 63",
+        "opening_hours": "Mo-Th 12:00-14:00,19:00-22:00; Fr,Sa 12:00-14:00,19:00-22:15; Su 12:00-14:00",
+        "survey:date": "2020-03-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1883474,
+          48.6978112
+        ]
+      },
+      "id": "node/1635488070"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2619669938",
+        "amenity": "restaurant",
+        "name": "La Cafet'"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1788745,
+          48.708277
+        ]
+      },
+      "id": "node/2619669938"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2719776890",
+        "amenity": "restaurant",
+        "contact:housenumber": "55",
+        "contact:phone": "+33 169314089",
+        "contact:street": "rue de Lozère",
+        "contact:website": "http://les-agapes.net/",
+        "name": "Les Agapes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2009687,
+          48.7052888
+        ]
+      },
+      "id": "node/2719776890"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2721130374",
+        "addr:housenumber": "46",
+        "addr:street": "Rue de Paris",
+        "amenity": "restaurant",
+        "cuisine": "pizza;italian",
+        "name": "Trattoria Belinda",
+        "opening_hours": "Mo-Su 18:00-22:00",
+        "phone": "+33 1 69 28 33 85",
+        "website": "http://www.trattoriabelinda.fr/"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1894154,
+          48.6966375
+        ]
+      },
+      "id": "node/2721130374"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2927559622",
+        "amenity": "restaurant",
+        "cuisine": "crepe",
+        "name": "L'Odyssée Ronde",
+        "website": "https://www.odysseeronde.fr/"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1623302,
+          48.6963602
+        ]
+      },
+      "id": "node/2927559622"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/2929596061",
+        "amenity": "restaurant",
+        "cuisine": "thai",
+        "name": "Papaye Verte",
+        "opening_hours": "Mo-Sa 12:00-14:30,19:00-22:00",
+        "phone": "+33 1 69 29 93 02"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1868312,
+          48.6981618
+        ]
+      },
+      "id": "node/2929596061"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3226338775",
+        "amenity": "restaurant",
+        "contact:phone": "+33 169821818",
+        "cuisine": "mexican;pizza",
+        "name": "Los Tacos",
+        "opening_hours": "Mo-Sa 11:00-14:30,18:00-23:00; Su 14:00-23:00",
+        "opening_hours:covid19": "Su 14:00-23:00; Mo-Sa 11:00-14:30,18:00-23:00",
+        "takeaway:covid19": "only"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1876396,
+          48.6969642
+        ]
+      },
+      "id": "node/3226338775"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3645706355",
+        "addr:city": "Orsay",
+        "addr:housenumber": "52",
+        "addr:postcode": "91400",
+        "addr:street": "Rue de Paris",
+        "amenity": "restaurant",
+        "cuisine": "crepe",
+        "name": "Crêperie Terre d'Armor",
+        "survey:date": "2020-03-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1897329,
+          48.6965829
+        ]
+      },
+      "id": "node/3645706355"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3732480732",
+        "amenity": "restaurant",
+        "name": "Asia",
+        "opening_hours": "Tu-Sa 12:00-14:00,19:00-21:00",
+        "wheelchair": "limited"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.191475,
+          48.7043093
+        ]
+      },
+      "id": "node/3732480732"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/3790541240",
+        "addr:city": "Orsay",
+        "addr:housenumber": "3",
+        "addr:postcode": "91400",
+        "addr:street": "Rue Verrier",
+        "amenity": "restaurant",
+        "cuisine": "japanese",
+        "name": "Samouraï"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.187143,
+          48.697981
+        ]
+      },
+      "id": "node/3790541240"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4103068954",
+        "addr:city": "Orsay",
+        "addr:housenumber": "2",
+        "addr:postcode": "91400",
+        "addr:street": "Rue de Paris",
+        "amenity": "restaurant",
+        "cuisine": "pizza",
+        "delivery": "yes",
+        "name": "La Dolce Pizza",
+        "opening_hours": "Mo-Sa 11:00-14:30,18:00-23:00; Fr,Su 18:00-23:00",
+        "phone": "+33 1 64 46 33 00",
+        "takeaway": "only"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1851514,
+          48.6966049
+        ]
+      },
+      "id": "node/4103068954"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4107674607",
+        "amenity": "restaurant",
+        "name": "Crous Supélec"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1638998,
+          48.7081027
+        ]
+      },
+      "id": "node/4107674607"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4546145279",
+        "addr:city": "Orsay",
+        "addr:housenumber": "5",
+        "addr:postcode": "91400",
+        "addr:street": "Rue Verrier",
+        "amenity": "restaurant",
+        "cuisine": "indian",
+        "name": "Thali Bar",
+        "opening_hours": "Mo-Sa 11:30-14:30,18:30-22:30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1873062,
+          48.6979444
+        ]
+      },
+      "id": "node/4546145279"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4708986641",
+        "addr:city": "Gif-sur-Yvette",
+        "addr:housenumber": "13 bis",
+        "addr:postcode": "91190",
+        "addr:street": "Rue Joliot-Curie",
+        "amenity": "restaurant",
+        "name": "Restaurant Universitaire du Lieu de Vie",
+        "website": "http://4sq.com/2kZv5Dd"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.171449,
+          48.709389
+        ]
+      },
+      "id": "node/4708986641"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/4927194171",
+        "amenity": "restaurant",
+        "capacity": "360",
+        "delivery": "no",
+        "name": "RIEA - Restaurant Inter-Entreprises-Administrations de Palaiseau",
+        "opening_hours": "Mo-Fr 11:30-14:00",
+        "outdoor_seating": "no",
+        "smoking": "no",
+        "takeaway": "no"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.202964,
+          48.7126222
+        ]
+      },
+      "id": "node/4927194171"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5161218424",
+        "amenity": "restaurant",
+        "diet:vegetarian": "yes",
+        "name": "Restaurant Gare de Lozère",
+        "opening_hours": "Mo-Th 06:30-24:00, Fr,Sa 06:30-02:00",
+        "opening_hours:covid19": "off",
+        "wheelchair": "limited"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2109336,
+          48.7063011
+        ]
+      },
+      "id": "node/5161218424"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5222497137",
+        "amenity": "restaurant",
+        "delivery": "no",
+        "name": "Cafétéria Crous"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2033504,
+          48.7129414
+        ]
+      },
+      "id": "node/5222497137"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5223785728",
+        "amenity": "restaurant",
+        "cuisine": "pizza;kebab",
+        "delivery": "yes",
+        "name": "Torino Pizza",
+        "opening_hours": "Mo-Fr 11:00-14:30,18:00-22:30; Sa 11:00-14:30,18:00-23:00; Su 18:00-23:00",
+        "outdoor_seating": "no",
+        "takeaway": "yes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.189597,
+          48.7015511
+        ]
+      },
+      "id": "node/5223785728"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5223821935",
+        "amenity": "restaurant",
+        "cuisine": "vietnamese",
+        "name": "Tân Dô",
+        "opening_hours": "Tu-Sa 12:00-14:00,19:00-22:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1907895,
+          48.702403
+        ]
+      },
+      "id": "node/5223821935"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5223821939",
+        "amenity": "restaurant",
+        "cuisine": "lebanese",
+        "diet:vegetarian": "yes",
+        "name": "Mon Liban",
+        "opening_hours": "Mo-Sa 18:45-22:30,We-Th 12:00-15:00,Su 12:00-15:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.189673,
+          48.7014436
+        ]
+      },
+      "id": "node/5223821939"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5236387809",
+        "amenity": "restaurant",
+        "cuisine": "asian",
+        "name": "Le Palais d'Orsay",
+        "opening_hours": "Mo-Sa 11:30-14:30,18:00-22:30; Su 18:00-22:30",
+        "survey:date": "2020-03-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1885859,
+          48.6968625
+        ]
+      },
+      "id": "node/5236387809"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5260656933",
+        "amenity": "restaurant",
+        "cuisine": "pizza",
+        "name": "Pizza Cesar",
+        "opening_hours:covid19": "Tu-Fr 12:00-14:00,18:00-22:00; Mo,Sa,Su 18:00-22:00",
+        "survey:date": "2019-11-15",
+        "takeaway:covid19": "only"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1852171,
+          48.6969384
+        ]
+      },
+      "id": "node/5260656933"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5281992058",
+        "amenity": "restaurant",
+        "name": "Restaurant Crous"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2036744,
+          48.7129063
+        ]
+      },
+      "id": "node/5281992058"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5302335586",
+        "amenity": "restaurant",
+        "cuisine": "chinese",
+        "name": "O Food Asia",
+        "survey:date": "2019-11-20"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2019213,
+          48.7142615
+        ]
+      },
+      "id": "node/5302335586"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5516786823",
+        "amenity": "restaurant",
+        "cuisine": "coffee_shop",
+        "delivery": "no",
+        "level": "0",
+        "name": "L’At Home",
+        "opening_hours": "Mo-Th 12:00-14:00, 19:00-21:00; Fr 12:00-14:00",
+        "outdoor_seating": "no",
+        "smoking": "no",
+        "stars": "0",
+        "takeaway": "no",
+        "toilets": "yes",
+        "wheelchair": "yes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1684855,
+          48.7095516
+        ]
+      },
+      "id": "node/5516786823"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5516786825",
+        "amenity": "restaurant",
+        "internet_access": "wlan",
+        "internet_access:fee": "no",
+        "level": "0",
+        "name": "Le Comptoir",
+        "opening_hours": "Mo-Su 11:00-24:00",
+        "outdoor_seating": "yes",
+        "smoking": "outside",
+        "wheelchair": "yes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1684855,
+          48.7092684
+        ]
+      },
+      "id": "node/5516786825"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/6308064594",
+        "amenity": "restaurant",
+        "name": "Yvette"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1656269,
+          48.7102906
+        ]
+      },
+      "id": "node/6308064594"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/6574870871",
+        "addr:city": "Bures-sur-Yvette",
+        "addr:housenumber": "57",
+        "addr:postcode": "91440",
+        "addr:street": "Rue Charles de Gaulle",
+        "amenity": "restaurant",
+        "cuisine": "fusion;french",
+        "name": "Mangata",
+        "opening_hours": "Tu-Sa 12:00-23:30",
+        "phone": "+33 1 60 13 51 21"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1625641,
+          48.6967917
+        ]
+      },
+      "id": "node/6574870871"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/6574870872",
+        "addr:city": "Bures-sur-Yvette",
+        "addr:housenumber": "57",
+        "addr:postcode": "91440",
+        "addr:street": "Rue Charles de Gaulle",
+        "amenity": "restaurant",
+        "cuisine": "brasserie;wine",
+        "name": "La Part des Anges",
+        "opening_hours": "Tu-Sa 10:00-23:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.162711,
+          48.6968495
+        ]
+      },
+      "id": "node/6574870872"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/6726964974",
+        "amenity": "restaurant",
+        "cuisine": "arab",
+        "name": "La Tour du Maroc"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.20896,
+          48.6990178
+        ]
+      },
+      "id": "node/6726964974"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/6831506268",
+        "amenity": "restaurant",
+        "name": "Living Room"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.2010875,
+          48.7143478
+        ]
+      },
+      "id": "node/6831506268"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7992091245",
+        "addr:city": "Orsay",
+        "addr:housenumber": "13",
+        "addr:postcode": "91400",
+        "addr:street": "Rue Jean-Louis Archangé",
+        "amenity": "restaurant",
+        "email": "contact@lesemillant.fr",
+        "name": "Le sémillant",
+        "opening_hours": "Tu-Sa 09:00-18:30",
+        "phone": "+33 1 70 27 37 15",
+        "ref:FR:SIREN": "879227759",
+        "ref:FR:SIRET": "87922775900013",
+        "website": "https://www.lesemillant.fr/"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.1864667,
+          48.6975246
+        ]
+      },
+      "id": "node/7992091245"
+    }
+  ]
+}

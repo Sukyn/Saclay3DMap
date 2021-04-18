@@ -102,16 +102,16 @@ class Land {
         // ... on fixe les normales pour la lumière
         this.satellite.normal(nbl.x, nbl.y, nbl.z);
         // ... on ajoute un attribut "heat" pour afficher les cartes de chaleur
-        this.satellite.attrib("heat", 0.0f, 0.0f);
+        this.satellite.attrib("heat", 0.0f, 0.0f, 0.0f);
         this.satellite.vertex(bl.x, bl.y, bl.z, u, v);
         this.satellite.normal(ntl.x, ntl.y, ntl.z);
-        this.satellite.attrib("heat", 0.0f, 0.0f);
+        this.satellite.attrib("heat", 0.0f, 0.0f, 0.0f);
         this.satellite.vertex(tl.x, tl.y, tl.z, u+tileSize*uvmap.width/5000, v);
         this.satellite.normal(ntr.x, ntr.y, ntr.z);
-        this.satellite.attrib("heat", 0.0f, 0.0f);
+        this.satellite.attrib("heat", 0.0f, 0.0f, 0.0f);
         this.satellite.vertex(tr.x, tr.y, tr.z, u+tileSize*uvmap.width/5000, v+tileSize*uvmap.height/3000);
         this.satellite.normal(nbr.x, nbr.y, nbr.z);
-        this.satellite.attrib("heat", 0.0f, 0.0f);
+        this.satellite.attrib("heat", 0.0f, 0.0f, 0.0f);
         this.satellite.vertex(br.x, br.y, br.z, u, v+tileSize*uvmap.height/3000);
 
         // utilise uvmap.height permet de ne pas dépendre de la taille

@@ -65,6 +65,7 @@ class Poi {
     // Récupération des points d'intérêt
     ArrayList<PVector> bykeParking = this.getPoints("bicycle.geojson");
     ArrayList<PVector> picnic = this.getPoints("picnic.geojson");
+    ArrayList<PVector> restaurant = this.getPoints("restaurant.geojson");
 
     for (int v = 0; v < this.land.satellite.getVertexCount(); v++) {
       // Initialise l'emplacement aux point cibles
@@ -73,6 +74,7 @@ class Poi {
       // Initialise les distances au maximum
       float nearestbykeParkingDistance = 250;
       float nearestPicNicTableDistance = 250;
+      float nearestRestaurantDistance = 250;
       // Calcule la station bykeParking la plus proche
       for (int p=0; p < bykeParking.size(); p++) {
         PVector point = bykeParking.get(p);
@@ -87,8 +89,19 @@ class Poi {
         if (d < nearestPicNicTableDistance)
           nearestPicNicTableDistance = d;
       }
+      // Calcule la station picnic la plus proche
+      for (int p=0; p < restaurant.size(); p++) {
+        PVector point = restaurant.get(p);
+        float d = dist(location.x, location.y, point.x, point.y);
+        if (d < nearestRestaurantDistance)
+          nearestRestaurantDistance = d;
+      }
       // Règle les attributs
-      this.land.satellite.setAttrib("heat", v, nearestbykeParkingDistance/250, nearestPicNicTableDistance/250);
+      this.land.satellite.setAttrib("heat",
+                                    v,
+                                    nearestbykeParkingDistance/250,
+                                    nearestPicNicTableDistance/250,
+                                    nearestRestaurantDistance/250);
     }
   }
 

@@ -8,12 +8,14 @@ Railways railways; // Tracé des voies ferrées
 Roads roads; // Tracé des routes
 Buildings buildings; // Tracé des bâtiments
 Poi poi; // Tracé des points d'intérêts (carte de chaleur)
-float sensibility; // Sensibilité des commandes de déplacement
+int sensibility; // Sensibilité des commandes de déplacement
 
 PShader programmeShader; // Shader pour afficher les Poi
+boolean hudVisible; // Booléen sur la visibilité du HUD
 
 boolean picnic; // Booléen sur l'affichage des table de picnic dans le shader
 boolean bicycle; // Booléen sur l'affichage des stations velo dans le shader
+boolean restaurant; // Booléen sur l'affichage des restaurants dans le shader
 
 void setup() {
   // Charge la carte des altitudes
@@ -58,7 +60,10 @@ void setup() {
 
   this.picnic = true;
   this.bicycle = true;
+  this.restaurant = true;
   this.sensibility = 10;
+  this.hudVisible = true;
+  
 }
 
 void draw(){
@@ -69,6 +74,7 @@ void draw(){
    // On envoie nos booléens au shader pour pouvoir les afficher ou non
   programmeShader.set("picnic", this.picnic);
   programmeShader.set("bicycle", this.bicycle);
+  programmeShader.set("restaurant", this.restaurant);
   shader(programmeShader);
   this.land.update();
   resetShader();
@@ -77,7 +83,9 @@ void draw(){
   this.gpx.update();
   this.railways.update();
   this.roads.update();
-  this.hud.update(this.camera);
+  if (this.hudVisible) {
+    this.hud.update(this.camera, this.sensibility);
+  }
 }
 
 void keyPressed() {
@@ -112,8 +120,13 @@ void keyPressed() {
         break;
       case 'v':
       case 'V':
-        // Cache/Montre station pour vélos
+        // Cache/Montre les stations pour vélos
         this.bicycle = !(this.bicycle);
+        break;
+      case 'x':
+      case 'X':
+        // Cache/Montre les restaurants
+        this.restaurant = !(this.restaurant);
         break;
       case 'l':
       case 'L':
@@ -153,6 +166,12 @@ void keyPressed() {
         // Cache/Montre les bâtiments
         this.buildings.toggle();
         break;
+      case 'h':
+      case 'H':
+        // Cache/Montre les bâtiments
+        this.hudVisible = !(this.hudVisible);
+        break;
+
       case 'z':
       case 'Z':
         // Regarder vers le haut
@@ -196,7 +215,7 @@ void mouseWheel(MouseEvent event) {
 
 void mouseDragged() {
   if (mouseButton== CENTER){
-    // Horizontale Camera 
+    // Horizontale Camera
     float dx = mouseX - pmouseX;
     this.camera.adjustLongitude(dx*2*this.sensibility/10000);
     // Verticale Camera

@@ -117,7 +117,11 @@ class Camera {
   * Gestion de l'orientation de la vision horizontale
   */
   public void xMove(float delta){
-    this.posX += delta;
+    if (this.longitude > -PI && this.longitude < 0) {
+      this.posX += delta;
+    } else {
+      this.posX -= delta;
+    }
   }
   /**
   * Gestion de l'orientation de la vision verticale

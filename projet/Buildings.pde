@@ -23,8 +23,8 @@ class Buildings {
 
   /**
   * Fonction d'ajout d'un fichier geojson à nos buildings
-  * @params fileName : le nom de notre fichier geojson
-  * @params couleur : La couleur associée au building
+  * @param fileName : le nom de notre fichier geojson
+  * @param couleur : La couleur associée au building
   */
   public void add(String fileName, color couleur){
 
@@ -88,6 +88,7 @@ class Buildings {
             roof.fill(couleur);
             walls.fill(couleur);
             // Et on y ajoute un peu de lumière pour les mirettes
+            // pour briller comme un bling bling bling sur le toit du building
             roof.emissive(0x60);
             walls.emissive(0x30);
 

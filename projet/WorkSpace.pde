@@ -20,10 +20,10 @@ class WorkSpace {
     // Vert Y
     this.gizmo.stroke(0xAA3FFF7F);
     this.gizmo.strokeWeight(1.0f);
-    this.gizmo.vertex(0,-size/2,  0);
-    this.gizmo.vertex(0,size/2,  0);
+    this.gizmo.vertex(0, -size/2, 0);
+    this.gizmo.vertex(0, size/2, 0);
     this.gizmo.strokeWeight(3.0f);
-    this.gizmo.vertex(0,0,  0);
+    this.gizmo.vertex(0, 0, 0);
     this.gizmo.vertex(0,size/100,  0);
     // Bleu Z
     this.gizmo.stroke(0xAA3F7FFF);
@@ -57,7 +57,6 @@ class WorkSpace {
   public void update(){
     shape(this.grid);
     shape(this.gizmo);
-
   }
 
   /**

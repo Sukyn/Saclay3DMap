@@ -11,6 +11,7 @@ Poi poi; // Tracé des points d'intérêts (carte de chaleur)
 int sensibility; // Sensibilité des commandes de déplacement
 
 PShader programmeShader; // Shader pour afficher les Poi
+
 boolean hudVisible; // Booléen sur la visibilité du HUD
 
 boolean picnic; // Booléen sur l'affichage des table de picnic dans le shader
@@ -21,24 +22,25 @@ void setup() {
   // Charge la carte des altitudes
   this.map = new Map3D("paris_saclay.data");
 
+  // Prépare les coordonnées système locales pour la grille et le gizmo
+  this.workspace = new WorkSpace(250*100);
+
+  // Mise en place du terrain
   this.land = new Land(this.map,"paris_saclay_4k.jpg");
+
   // Mise en place de l'affichage
   fullScreen(P3D);
-  // Mise en place de l'Affichage Tête Haute
-
-  programmeShader = loadShader("myFrag.glsl", "myVert.glsl");
-  this.hud = new Hud();
-
   smooth(4);
   frameRate(60);
   // Dessin initial
   background(0x40);
-  // Prépare les coordonnées système locales pour la grille et le gizmo
-  this.workspace = new WorkSpace(250*100);
+
+  programmeShader = loadShader("myFrag.glsl", "myVert.glsl");
+  // Affichage Tête Haute
+  this.hud = new Hud();
 
   // Caméra 3D  (X+ droite / Z+ haut / Y+ Frontal)
   this.camera = new Camera(-PI/2, 1.19, 2690);
-  this.camera.update();
 
   // Facilite les mouvements de caméra
   hint(ENABLE_KEY_REPEAT);
@@ -58,12 +60,12 @@ void setup() {
   this.buildings.add("buildings_Thales.geojson", 0xFFFF3030);
   this.buildings.add("buildings_Paris_Saclay.geojson", 0xFFee00dd);
 
-  this.picnic = true;
-  this.bicycle = true;
-  this.restaurant = true;
+  this.picnic = false;
+  this.bicycle = false;
+  this.restaurant = false;
   this.sensibility = 10;
   this.hudVisible = true;
-  
+
 }
 
 void draw(){
@@ -203,6 +205,9 @@ void keyPressed() {
         if (this.sensibility > 0)
         this.sensibility -= 1;
         break;
+      case 'y':
+      case 'Y':
+        this.workspace.toggle();
       }
     }
 

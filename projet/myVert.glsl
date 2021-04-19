@@ -20,14 +20,14 @@ void main() {
   float green = color[2];
 
   if (heat[0] < 0.9 && bicycle)
-    blue = color[1]+1.5-2*heat[0];
+    blue += 1.5-2*heat[0];
 
 
   if (heat[1] < 0.9 && picnic)
-    green = color[2]+1.5-2*heat[1];
+    green += 1.5-2*heat[1];
 
   if (heat[2] < 0.9 && restaurant) {
-    red = color[0]+3-heat[2];
+    red += 3-heat[2];
   }
   vertColor = vec4(red, green, blue, color[3]);
 

@@ -25,8 +25,8 @@ class Land {
 
   /**
   * Constructeur de la classe
-  * @params map : La carte avec laquelle on travaille
-  * @params fileName : Le nom de notre fichier contenant l'image GPS
+  * @param map : La carte avec laquelle on travaille
+  * @param fileName : Le nom de notre fichier contenant l'image satellite
   */
   Land(Map3D map, String fileName) {
 
@@ -84,43 +84,43 @@ class Land {
       int v = 0;
       for (int j = (int)(-h/(2*tileSize)); j < h/(2*tileSize); j++){
         // On récupère nos quatre points
-        Map3D.ObjectPoint bl = this.map.new ObjectPoint(i*tileSize, j*tileSize);
-        Map3D.ObjectPoint tl = this.map.new ObjectPoint((i+1)*tileSize, j*tileSize);
-        Map3D.ObjectPoint tr = this.map.new ObjectPoint((i+1)*tileSize, (j+1)*tileSize);
-        Map3D.ObjectPoint br = this.map.new ObjectPoint(i*tileSize, (j+1)*tileSize);
+        Map3D.ObjectPoint bottomLeft = this.map.new ObjectPoint(i*tileSize, j*tileSize);
+        Map3D.ObjectPoint topLeft = this.map.new ObjectPoint((i+1)*tileSize, j*tileSize);
+        Map3D.ObjectPoint topRight = this.map.new ObjectPoint((i+1)*tileSize, (j+1)*tileSize);
+        Map3D.ObjectPoint bottomRight = this.map.new ObjectPoint(i*tileSize, (j+1)*tileSize);
         // On calcule leurs normales
-        PVector nbl = bl.toNormal();
-        PVector ntl = tl.toNormal();
-        PVector ntr = tr.toNormal();
-        PVector nbr = br.toNormal();
+        PVector normalBottomLeft = bottomLeft.toNormal();
+        PVector normalTopLeft = topLeft.toNormal();
+        PVector ntr = topRight.toNormal();
+        PVector normalBottomRight = bottomRight.toNormal();
         // On trace l'affiché en file de fer simplement en traçant un rectangle
-        this.wireFrame.vertex(bl.x, bl.y, bl.z);
-        this.wireFrame.vertex(tl.x, tl.y, tl.z);
-        this.wireFrame.vertex(tr.x, tr.y, tr.z);
-        this.wireFrame.vertex(br.x, br.y, br.z);
+        this.wireFrame.vertex(bottomLeft.x, bottomLeft.y, bottomLeft.z);
+        this.wireFrame.vertex(topLeft.x, topLeft.y, topLeft.z);
+        this.wireFrame.vertex(topRight.x, topRight.y, topRight.z);
+        this.wireFrame.vertex(bottomRight.x, bottomRight.y, bottomRight.z);
         // Idem pour la vision satellite, à quelques détails près...
         // ... on fixe les normales pour la lumière
-        this.satellite.normal(nbl.x, nbl.y, nbl.z);
+        this.satellite.normal(normalBottomLeft.x, normalBottomLeft.y, normalBottomLeft.z);
         // ... on ajoute un attribut "heat" pour afficher les cartes de chaleur
         this.satellite.attrib("heat", 0.0f, 0.0f, 0.0f);
-        this.satellite.vertex(bl.x, bl.y, bl.z, u, v);
-        this.satellite.normal(ntl.x, ntl.y, ntl.z);
+        this.satellite.vertex(bottomLeft.x, bottomLeft.y, bottomLeft.z, u, v);
+        this.satellite.normal(normalTopLeft.x, normalTopLeft.y, normalTopLeft.z);
         this.satellite.attrib("heat", 0.0f, 0.0f, 0.0f);
-        this.satellite.vertex(tl.x, tl.y, tl.z, u+tileSize*uvmap.width/5000, v);
+        this.satellite.vertex(topLeft.x, topLeft.y, topLeft.z, u+tileSize*uvmap.width/map.width, v);
         this.satellite.normal(ntr.x, ntr.y, ntr.z);
         this.satellite.attrib("heat", 0.0f, 0.0f, 0.0f);
-        this.satellite.vertex(tr.x, tr.y, tr.z, u+tileSize*uvmap.width/5000, v+tileSize*uvmap.height/3000);
-        this.satellite.normal(nbr.x, nbr.y, nbr.z);
+        this.satellite.vertex(topRight.x, topRight.y, topRight.z, u+tileSize*uvmap.width/map.width, v+tileSize*uvmap.height/map.height);
+        this.satellite.normal(normalBottomRight.x, normalBottomRight.y, normalBottomRight.z);
         this.satellite.attrib("heat", 0.0f, 0.0f, 0.0f);
-        this.satellite.vertex(br.x, br.y, br.z, u, v+tileSize*uvmap.height/3000);
+        this.satellite.vertex(bottomRight.x, bottomRight.y, bottomRight.z, u, v+tileSize*uvmap.height/map.height);
 
         // utilise uvmap.height permet de ne pas dépendre de la taille
         // du fichier contenant l'image !
-        v += tileSize*uvmap.height/3000;
+        v += tileSize*uvmap.height/map.height;
       }
       // utilise uvmap.width permet de ne pas dépendre de la taille
       // du fichier contenant l'image !
-      u += tileSize*uvmap.width/5000;
+      u += tileSize*uvmap.width/map.width;
     }
     this.satellite.endShape();
     this.wireFrame.endShape();

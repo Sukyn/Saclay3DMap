@@ -3,7 +3,7 @@ import java.util.*;
 class Hud {
   private PMatrix3D hud;
   Hud() {
-     // Should be constructed just after P3D size() or fullScreen()
+     // Doit être construit juste après le P3D
      this.hud = g.getMatrix((PMatrix3D) null);
   }
 
@@ -28,12 +28,12 @@ class Hud {
   * Procédure d'affichage des FPS
   */
   private void displayFPS() {
-    // Bottom left area
+    // Zone en bas à droite
     noStroke();
     fill(96);
     rectMode(CORNER);
     rect(10, height-30, 60, 20, 5, 5, 5, 5);
-    // Value
+    // Valeur
     fill(0xF0);
     textMode(SHAPE);
     textSize(14);
@@ -45,12 +45,12 @@ class Hud {
   * Procédure d'affichage des informations de la caméra
   */
   public void displayCamera(Camera camera){
-    // Top left area
+    // Zone en haut à gauche
     noStroke();
     fill(96);
     rectMode(CORNER);
     rect(20, 10, 200, 130, 5, 5, 5, 5);
-    // Value
+    // Valeur
     fill(0xF0);
     textMode(SHAPE);
     textSize(14);
@@ -78,22 +78,23 @@ class Hud {
       "Texture du sol : L",
       "Lumière : C",
       "Tracé GPX : G",
-      "Sensibilité : O, I"
+      "Sensibilité : O, I",
+      "Gizmo & Grille : Y"
       );
-    // Top right area
+    // Zone en haut à droite
     noStroke();
     fill(96);
     rectMode(CORNER);
-    rect(width-320, 10, 310, 60+25*commandes.size(), 5, 5, 5, 5);
-    // Value
+    int offset = 25;
+    int position = 60;
+    rect(width-320, 10, 310, position+offset*commandes.size(), 5, 5, 5, 5);
+    // Valeur
     fill(0xF0);
     textMode(SHAPE);
     textSize(20);
     textAlign(CENTER, CENTER);
     text("Commandes", width-160, 20);
 
-    int offset = 25;
-    int position = 60;
     for (int i = 0; i < commandes.size(); i++){
       text(commandes.get(i), width-160, position);
       position += offset;

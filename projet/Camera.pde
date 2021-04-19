@@ -30,9 +30,7 @@ class Camera {
     * Formules de transformation en coordonnées cartésiennes
     * @see https://fr.wikipedia.org/wiki/Coordonn%C3%A9es_sph%C3%A9riques
     */
-    this.x = radius*sin(colatitude)*cos(longitude);
-    this.y = radius*sin(colatitude)*sin(longitude);
-    this.z = radius*cos(colatitude);
+    updateCoord();
 
     // Variables modifiées par l'utilisateur
     this.posX = 0;
@@ -65,8 +63,17 @@ class Camera {
   }
 
   /**
+  * Procédure de conversion des coordonnées sphériques en
+  * coordonnées cartésiennes
+  */
+  public void updateCoord(){
+    this.x = this.radius*sin(this.colatitude)*cos(this.longitude);
+    this.y = this.radius*sin(this.colatitude)*sin(this.longitude);
+    this.z = this.radius*cos(this.colatitude);
+  }
+  /**
   * Gestion du zoom de la caméra
-  * @params offset : La modification du rayon
+  * @param offset : La modification du rayon
   */
   public void adjustRadius(float offset){
     // On définit des bornes de zoom max et mini
@@ -74,22 +81,18 @@ class Camera {
     if (this.radius+offset < width*3.0 && this.radius+offset > width*0.5){
       this.radius += offset;
       // On recalcule les coordonnées cartésiennes selon le nouveau rayon
-      this.x = radius*sin(colatitude)*cos(longitude);
-      this.y = radius*sin(colatitude)*sin(longitude);
-      this.z = radius*cos(colatitude);
+      updateCoord();
     }
   }
   /**
   * Gestion du zoom de la longitude
-  * @params offset : La modification de la longitude
+  * @param offset : La modification de la longitude
   */
   public void adjustLongitude(float delta){
     // Il n'est pas non plus de faire le tour du monde à l'infini
     if (this.longitude+delta > -3*PI/2 && this.longitude+delta < PI/2){
       this.longitude += delta;
-      this.x = radius*sin(colatitude)*cos(longitude);
-      this.y = radius*sin(colatitude)*sin(longitude);
-      // Note : on ne recalcule pas z parce que c'est inutile
+      updateCoord();
     }
   }
   /**
@@ -100,9 +103,7 @@ class Camera {
     // Ni de passer sous le sol
     if (this.colatitude+delta > 0.000001 && this.colatitude+delta < PI/2){
       this.colatitude += delta;
-      this.x = radius*sin(colatitude)*cos(longitude);
-      this.y = radius*sin(colatitude)*sin(longitude);
-      this.z = radius*cos(colatitude);
+      updateCoord();
     }
   }
 

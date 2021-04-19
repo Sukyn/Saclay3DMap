@@ -95,38 +95,39 @@ class Gpx {
       * Le GPX est composé de points d'intérets que l'on représentera en épingle
       * et de tracés "Track" qui les relient entre eux au sol
       */
-      case "LineString":
+        case "LineString":
 
-        // GPX Track
-        JSONArray coordinates = geometry.getJSONArray("coordinates");
-        if (coordinates != null)
-          for (int p=0; p < coordinates.size(); p++) {
-            // On relie les différents points des coordonnées entre eux
-            JSONArray point = coordinates.getJSONArray(p);
-            Map3D.GeoPoint gp = this.map.new GeoPoint(point.getFloat(0), point.getFloat(1));
-            Map3D.ObjectPoint mp = this.map.new ObjectPoint(gp);
-            this.track.vertex(mp.x, mp.y, mp.z);
+          // GPX Track
+          if (geometry.hasKey("coordinates")) {
+            JSONArray coordinates = geometry.getJSONArray("coordinates");
+            for (int p=0; p < coordinates.size(); p++) {
+              // On relie les différents points des coordonnées entre eux
+              JSONArray point = coordinates.getJSONArray(p);
+              Map3D.GeoPoint geoPoint = this.map.new GeoPoint(point.getFloat(0), point.getFloat(1));
+              Map3D.ObjectPoint mapPoint = this.map.new ObjectPoint(geoPoint);
+              this.track.vertex(mapPoint.x, mapPoint.y, mapPoint.z);
+            }
           }
-        break;
+          break;
 
-      case "Point":
+        case "Point":
 
-        // Point de passage GPX
-        if (geometry.hasKey("coordinates")) {
-          JSONArray point = geometry.getJSONArray("coordinates");
-          Map3D.GeoPoint gp = this.map.new GeoPoint(point.getFloat(0), point.getFloat(1));
-          Map3D.ObjectPoint mp = this.map.new ObjectPoint(gp);
-          // On construit nos épingles
-          this.posts.vertex(mp.x, mp.y, mp.z);
-          this.posts.vertex(mp.x, mp.y, mp.z+this.height);
-          this.thumbTracks.vertex(mp.x, mp.y, mp.z+this.height);
-        }
-        break;
+          // Point de passage GPX
+          if (geometry.hasKey("coordinates")) {
+            JSONArray point = geometry.getJSONArray("coordinates");
+            Map3D.GeoPoint geoPoint = this.map.new GeoPoint(point.getFloat(0), point.getFloat(1));
+            Map3D.ObjectPoint mapPoint = this.map.new ObjectPoint(geoPoint);
+            // On construit nos épingles
+            this.posts.vertex(mapPoint.x, mapPoint.y, mapPoint.z);
+            this.posts.vertex(mapPoint.x, mapPoint.y, mapPoint.z+this.height);
+            this.thumbTracks.vertex(mapPoint.x, mapPoint.y, mapPoint.z+this.height);
+          }
+          break;
 
-      // Les GPX ne sont que des Point et des Lignes, sinon c'est pas normal
-      default:
-        println("WARNING: GeoJSON '" + geometry.getString("type", "undefined") + "' geometry type not handled.");
-        break;
+        // Les GPX ne sont que des Point et des Lignes, sinon c'est pas normal
+        default:
+          println("WARNING: GeoJSON '" + geometry.getString("type", "undefined") + "' geometry type not handled.");
+          break;
       }
     }
     this.track.endShape();

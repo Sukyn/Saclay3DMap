@@ -8,8 +8,8 @@ class Railways {
 
   /**
   * Constructeur de la classe
-  * @params map : La carte sur laquelle on travaille
-  * @params fileName : le nom du fichier geojson représentant notre voie ferrée
+  * @param map : La carte sur laquelle on travaille
+  * @param fileName : le nom du fichier geojson représentant notre voie ferrée
   */
   public Railways(Map3D map, String fileName){
 
@@ -74,51 +74,62 @@ class Railways {
 
           // On récupère le premier point
           JSONArray firstPoint = coordinates.getJSONArray(0);
-          Map3D.GeoPoint fGp = map.new GeoPoint(firstPoint.getFloat(0), firstPoint.getFloat(1));
-          fGp.elevation += 7.5d;
-          Map3D.ObjectPoint fMp = map.new ObjectPoint(fGp);
+          Map3D.GeoPoint firstGeoPoint = map.new GeoPoint(firstPoint.getFloat(0), firstPoint.getFloat(1));
+          firstGeoPoint.elevation += 7.5d;
+          Map3D.ObjectPoint firstMapPoint = map.new ObjectPoint(firstGeoPoint);
           /** Et on initialise le second point avec le même point !
           * ça permet après de pouvoir définir notre troisième point à
           * l'identique lors du premier passage dans la boucle
           * ça gère notamment les cas où il y a très peu de points dans notre ligne
           */
-          Map3D.ObjectPoint sMp = fMp;
+          Map3D.ObjectPoint secondMapPoint = firstMapPoint;
+
+          float alt = 0;
+          boolean isBridge = feature.getJSONObject("properties").hasKey("bridge");
+
+          if (isBridge) {
+            alt = firstMapPoint.z;
+          }
 
           // Pour tous les points, on rentre dans la boucle
           for (int p=0; p < coordinates.size(); p++) {
 
-            /** sMp est en fait le point que l'on trace à chaque passage de boucle
+            /** secondMapPoint est en fait le point que l'on trace à chaque passage de boucle
             * c'est celui qui est entre le first et le third !
             */
 
             // On vérifie qu'il est bien dans notre carte
-            if (sMp.inside()) {
+            if (secondMapPoint.inside()) {
 
               // On initialise le troisieme point au second
               // (utile s'il n'y a que deux points !)
-              Map3D.ObjectPoint tMp = sMp;
+              Map3D.ObjectPoint thirdMapPoint = secondMapPoint;
 
               // Si l'on est sur le dernier point, le troisieme point est identique au
               // second (parce qu'il n'y en a pas après), donc on ne le recalcule pas
               if (p != coordinates.size()-1){
                 JSONArray thirdPoint = coordinates.getJSONArray(p+1);
-                Map3D.GeoPoint tGp = map.new GeoPoint(thirdPoint.getFloat(0), thirdPoint.getFloat(1));
-                tGp.elevation += 7.5d;
+                Map3D.GeoPoint thirdGeoPoint = map.new GeoPoint(thirdPoint.getFloat(0), thirdPoint.getFloat(1));
+                thirdGeoPoint.elevation += 7.5d;
                 // On a ainsi calculé notre troisieme point
-                tMp = map.new ObjectPoint(tGp);
+                thirdMapPoint = map.new ObjectPoint(thirdGeoPoint);
               }
 
               // On calcule la normale selon le point d'avant et d'après
-              PVector Va = new PVector(tMp.y - fMp.y, fMp.x - tMp.x).normalize().mult(laneWidth/2.0f);
+              PVector Va = new PVector(thirdMapPoint.y - firstMapPoint.y, firstMapPoint.x - thirdMapPoint.x).normalize().mult(laneWidth/2.0f);
+
+              if (isBridge){
+                secondMapPoint.z = alt;
+              }
               // On trace notre ligne
               lane.normal(0.0f, 0.0f, 1.0f);
-              lane.vertex(sMp.x - Va.x, sMp.y - Va.y, sMp.z);
+              lane.vertex(secondMapPoint.x - Va.x, secondMapPoint.y - Va.y, secondMapPoint.z);
               lane.normal(0.0f, 0.0f, 1.0f);
-              lane.vertex(sMp.x + Va.x, sMp.y + Va.y, sMp.z);
+              lane.vertex(secondMapPoint.x + Va.x, secondMapPoint.y + Va.y, secondMapPoint.z);
 
               // Et on n'oublie pas d'avancer nos points
-              fMp = sMp;
-              sMp = tMp;
+              firstMapPoint = secondMapPoint;
+              secondMapPoint = thirdMapPoint;
             }
           }
 

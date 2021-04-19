@@ -28,8 +28,8 @@ class Gpx {
 
   /**
   * Constructeur de la classe
-  * @params map : Le terrain sur lequel on travaille
-  * @params fileName : le nom du fichier de notre tracé GPX
+  * @param map : Le terrain sur lequel on travaille
+  * @param fileName : le nom du fichier de notre tracé GPX
   */
   public Gpx(Map3D map, String fileName){
     this.map = map;

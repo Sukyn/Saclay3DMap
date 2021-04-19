@@ -122,7 +122,7 @@ class Roads {
       lane.emissive(0x7F);
 
       // On récupère l'information de s'il s'agit d'un pont ou non
-      String isBridge = feature.getJSONObject("properties").getString("bridge", "N/A");
+      boolean isBridge = feature.getJSONObject("properties").hasKey("bridge");
 
       JSONObject geometry = feature.getJSONObject("geometry");
       switch (geometry.getString("type", "undefined")) {
@@ -141,61 +141,52 @@ class Roads {
 
           // On récupère le premier point
           JSONArray firstPoint = coordinates.getJSONArray(0);
-          Map3D.GeoPoint fGp = map.new GeoPoint(firstPoint.getFloat(0), firstPoint.getFloat(1));
-          fGp.elevation += laneOffset;
-          Map3D.ObjectPoint fMp = map.new ObjectPoint(fGp);
+          Map3D.GeoPoint firstGeoPoint = map.new GeoPoint(firstPoint.getFloat(0), firstPoint.getFloat(1));
+          firstGeoPoint.elevation += laneOffset;
+          Map3D.ObjectPoint firstMapPoint = map.new ObjectPoint(firstGeoPoint);
           /** Et on initialise le second point avec le même point !
           * ça permet après de pouvoir définir notre troisième point à
           * l'identique lors du premier passage dans la boucle
           * ça gère notamment les cas où il y a très peu de points dans notre ligne
           */
-          Map3D.ObjectPoint sMp = fMp;
+          Map3D.ObjectPoint secondMapPoint = firstMapPoint;
 
           // Pour tous les points, on rentre dans la boucle
           for (int p=0; p < coordinates.size(); p++) {
 
-            /** sMp est en fait le point que l'on trace à chaque passage de boucle
+            /** secondMapPoint est en fait le point que l'on trace à chaque passage de boucle
             * c'est celui qui est entre le first et le third !
             */
 
             // On vérifie qu'il est bien dans notre carte
-            if (sMp.inside()) {
+            if (secondMapPoint.inside()) {
 
               // On initialise le troisieme point au second
               // (utile s'il n'y a que deux points !)
-              Map3D.ObjectPoint tMp = sMp;
+              Map3D.ObjectPoint thirdMapPoint = secondMapPoint;
 
               // Si l'on est sur le dernier point, le troisieme point est identique au
               // second (parce qu'il n'y en a pas après), donc on ne le recalcule pas
               if (p != coordinates.size()-1) {
                 JSONArray thirdPoint = coordinates.getJSONArray(p+1);
-                Map3D.GeoPoint tGp = map.new GeoPoint(thirdPoint.getFloat(0), thirdPoint.getFloat(1));
-                tGp.elevation += laneOffset;
+                Map3D.GeoPoint thirdGeoPoint = map.new GeoPoint(thirdPoint.getFloat(0), thirdPoint.getFloat(1));
+                thirdGeoPoint.elevation += laneOffset;
                 // On a ainsi calculé notre troisieme point
-                tMp = map.new ObjectPoint(tGp);
+                thirdMapPoint = map.new ObjectPoint(thirdGeoPoint);
               }
 
               // On calcule la normale selon le point d'avant et d'après
-              PVector Va = new PVector(tMp.y - fMp.y, fMp.x - tMp.x).normalize().mult(laneWidth/2.0f);
-              if (isBridge == "N/A"){
-                // On trace notre ligne
-                lane.normal(0.0f, 0.0f, 1.0f);
-                lane.vertex(sMp.x - Va.x, sMp.y - Va.y, sMp.z);
-                lane.normal(0.0f, 0.0f, 1.0f);
-                lane.vertex(sMp.x + Va.x, sMp.y + Va.y, sMp.z);
+              PVector Va = new PVector(thirdMapPoint.y - firstMapPoint.y, firstMapPoint.x - thirdMapPoint.x).normalize().mult(laneWidth/2.0f);
 
-              } else {
-                // GERER LES PONTS ICI SVP
-                // À FAIRE
-                lane.normal(0.0f, 0.0f, 1.0f);
-                lane.vertex(sMp.x - Va.x, sMp.y - Va.y, sMp.z);
-                lane.normal(0.0f, 0.0f, 1.0f);
-                lane.vertex(sMp.x + Va.x, sMp.y + Va.y, sMp.z);
-              }
+              // On trace notre ligne
+              lane.normal(0.0f, 0.0f, 1.0f);
+              lane.vertex(secondMapPoint.x - Va.x, secondMapPoint.y - Va.y, secondMapPoint.z);
+              lane.normal(0.0f, 0.0f, 1.0f);
+              lane.vertex(secondMapPoint.x + Va.x, secondMapPoint.y + Va.y, secondMapPoint.z);
 
               // Et on n'oublie pas d'avancer nos points
-              fMp = sMp;
-              sMp = tMp;
+              firstMapPoint = secondMapPoint;
+              secondMapPoint = thirdMapPoint;
             }
           }
 

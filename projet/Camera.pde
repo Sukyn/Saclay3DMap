@@ -17,10 +17,10 @@ class Camera {
 
   /**
   * Constructeur de la classe
-  * @params longitude  : angle entre les vecteurs x et le vecteur du
+  * @param longitude  : angle entre les vecteurs x et le vecteur du
   *                      projeté orthogonal du point
-  * @params colatitude : angle entre les vecteurs z et le vecteur du point
-  * @params radius     : distance du point au centre
+  * @param colatitude : angle entre les vecteurs z et le vecteur du point
+  * @param radius     : distance du point au centre
   */
   public Camera(float longitude, float colatitude, float radius){
     this.longitude = longitude;

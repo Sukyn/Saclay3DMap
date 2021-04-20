@@ -106,21 +106,21 @@ class Land {
         this.satellite.vertex(bottomLeft.x, bottomLeft.y, bottomLeft.z, u, v);
         this.satellite.normal(normalTopLeft.x, normalTopLeft.y, normalTopLeft.z);
         this.satellite.attrib("heat", 0.0f, 0.0f, 0.0f);
-        this.satellite.vertex(topLeft.x, topLeft.y, topLeft.z, u+tileSize*uvmap.width/map.width, v);
+        this.satellite.vertex(topLeft.x, topLeft.y, topLeft.z, u+tileSize*uvmap.width/(int)map.width, v);
         this.satellite.normal(ntr.x, ntr.y, ntr.z);
         this.satellite.attrib("heat", 0.0f, 0.0f, 0.0f);
-        this.satellite.vertex(topRight.x, topRight.y, topRight.z, u+tileSize*uvmap.width/map.width, v+tileSize*uvmap.height/map.height);
+        this.satellite.vertex(topRight.x, topRight.y, topRight.z, u+tileSize*uvmap.width/(int)map.width, v+tileSize*uvmap.height/(int)map.height);
         this.satellite.normal(normalBottomRight.x, normalBottomRight.y, normalBottomRight.z);
         this.satellite.attrib("heat", 0.0f, 0.0f, 0.0f);
-        this.satellite.vertex(bottomRight.x, bottomRight.y, bottomRight.z, u, v+tileSize*uvmap.height/map.height);
+        this.satellite.vertex(bottomRight.x, bottomRight.y, bottomRight.z, u, v+tileSize*uvmap.height/(int)map.height);
 
         // utilise uvmap.height permet de ne pas dépendre de la taille
         // du fichier contenant l'image !
-        v += tileSize*uvmap.height/map.height;
+        v += tileSize*uvmap.height/(int)map.height;
       }
       // utilise uvmap.width permet de ne pas dépendre de la taille
       // du fichier contenant l'image !
-      u += tileSize*uvmap.width/map.width;
+      u += tileSize*uvmap.width/(int)map.width;
     }
     this.satellite.endShape();
     this.wireFrame.endShape();
